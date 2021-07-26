@@ -1,0 +1,95 @@
+<template #tree>
+
+      <el-row class="tac" >
+        <el-menu
+            :default-active="defaultActive"
+            class="el-menu-vertical-demo"
+            router
+            :unique-opened="true"
+            :style="{width:isCollapse?'44px':'200px'}"
+            background-color="#304156"
+            text-color="#bfcbd9"
+            active-text-color="#409eff"
+            :collapse="isCollapse">
+          <div style="display: flex;padding-top:30px;justify-content: center;" v-if="!isCollapse">
+            <img src="public/favicon.ico">
+            <span style="color: white;font-size: 20px;">展想科技</span>
+          </div>
+          <tree-menu :dataList="menuDataList" class="child-item"></tree-menu>
+        </el-menu>
+      </el-row>
+
+
+  </template>
+
+<script>
+
+export default {
+  name: "Menu",
+  props:{
+    isCollapse:{
+      type:Boolean,
+      default:true
+    },
+    menuDataList:{
+      type: Array,
+      // eslint-disable-next-line vue/require-valid-default-prop
+      default: []
+    }
+  },
+  data() {
+    return {
+      defaultActive:'',
+    };
+  },
+  created() {
+    window.addMenu=this.addMenu
+  },
+  methods: {
+    addMenu(defaultActive){
+      this.defaultActive=defaultActive;
+    }
+  },
+  watch:{
+    $route: {
+      handler: function (route) {
+        if(route.path.length>1){
+          this.defaultActive=route.path.toString().substring(1,route.path.toString().length)
+        }else{
+          this.defaultActive=route.path;
+        }
+
+      },
+      immediate: true
+    },
+  }
+}
+</script>
+
+<style scoped>
+
+.tac{
+  height: 100%;
+  overflow-x: hidden;
+
+}
+/* 定义滚动条样式 */
+.tac::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background-color: rgba(240, 240, 240, 1);
+}
+
+.child-item .el-menu-item{
+  background-color: #1F2D3D!important;
+}
+.child-item .el-menu-item:hover{
+  background-color: #001528!important;
+}
+.child-item .el-submenu__title{
+  background-color: #1F2D3D!important;
+}
+.child-item .el-submenu__title:hover{
+  background-color: #001528!important;
+}
+</style>
