@@ -6,14 +6,13 @@
             class="el-menu-vertical-demo"
             router
             :unique-opened="true"
-            :style="{width:isCollapse?'44px':'200px'}"
             background-color="#304156"
             text-color="#bfcbd9"
             active-text-color="#409eff"
             :collapse="isCollapse">
           <div style="display: flex;padding-top:30px;justify-content: center;" v-if="!isCollapse">
-            <img src="public/favicon.ico">
-            <span style="color: white;font-size: 20px;">展想科技</span>
+            <img src="../../assets/logo.png" width="25">
+            <span style="color: white;font-size: 20px;">XX科技</span>
           </div>
           <tree-menu :dataList="menuDataList" class="child-item"></tree-menu>
         </el-menu>
@@ -79,7 +78,10 @@ export default {
   height: 0px;
   background-color: rgba(240, 240, 240, 1);
 }
-
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 100%;
+}
 .child-item .el-menu-item{
   background-color: #1F2D3D!important;
 }

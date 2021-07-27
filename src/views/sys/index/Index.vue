@@ -1,13 +1,32 @@
 <template>
     <el-container style="height: 100%">
 
-      <n-menu :is-collapse="isCollapse" :menu-data-list="menuDataList" ></n-menu>
+      <div class="box" v-if="dialogShow&&!isCollapse" >
+        <div id="dialog">
+          <el-aside v-if="dialogShow&&!isCollapse" width="0px"  id="transition_width" class="transition_width">
+            <n-menu :is-collapse="isCollapse" :menu-data-list="menuDataList" ></n-menu>
+          </el-aside>
+          <div style="height: 100%;flex: 1" @click="clickDialogShow(false)"></div>
+        </div>
+      </div>
+
+      <!--移动端收起-->
+      <el-aside v-if="!dialogShow&&isMobile" width="0px" style="transition:all 2s;">
+        <n-menu :is-collapse="isCollapse" :menu-data-list="menuDataList" ></n-menu>
+      </el-aside>
+
+      <!--pc端收起-->
+      <el-aside v-if="!dialogShow&&!isMobile" :width="!isCollapse?'200px':'45px'" style="transition:all 1s;">
+        <n-menu :is-collapse="isCollapse" :menu-data-list="menuDataList" ></n-menu>
+      </el-aside>
+
+
       <el-container>
         <el-header style="height: 40px">
           <div class="header_i">
             <div style="margin-right: 20px;font-size: 23px">
-              <i v-if="!isCollapse" class="el-icon-s-fold" @click="isCollapse=true"></i>
-              <i v-if="isCollapse" class="el-icon-s-unfold" @click="isCollapse=false"></i>
+              <i v-if="!isCollapse" class="el-icon-s-fold" @click="clickCollapse(true)"></i>
+              <i v-if="isCollapse" class="el-icon-s-unfold" @click="clickCollapse(false)"></i>
             </div>
           <breadcrumb :menuList="menuList"></breadcrumb>
            <setting></setting>
@@ -15,14 +34,18 @@
           <el-divider style="margin:5px 0;"></el-divider>
 <!--          <n-tab></n-tab>-->
         </el-header>
-        <el-main >
-          <div class="content_div">
+        <el-main>
+
+
+          <div class="content_div" >
             <router-view v-slot="{ Component  }"  v-if="isRouterAlive">
               <keep-alive>
-                <component  :is="Component"  />
+                <component :is="Component"  />
               </keep-alive>
             </router-view>
           </div>
+
+
 
         </el-main>
       </el-container>
@@ -31,21 +54,25 @@
 </template>
 
 <script>
-import store from "@/store";
 
+import ResizeHandler from "@/components/menu/mixin/ResizeHandler";
 export default {
   name: "Index",
+
   provide () {  // 在祖先组件中通过 provide 提供变量
     return {
       reload: this.reload, //  声明一个变量
     }
   },
+  mixins: [ResizeHandler],
   data(){
     return{
       isCollapse:false,
       menuList:[],
       isRouterAlive:true,
       menuDataList:JSON.parse(this.$store.getters.getMenuList),
+      dialogShow:false,
+      isMobile:false,
     }
   },
   created() {
@@ -57,8 +84,6 @@ export default {
     let _this=this;
     window.findMenuByTitle=_this.findMenuByTitle;
     _this.findMenuByTitle("数据汇总");
-
-
   },
 
   methods:{
@@ -69,6 +94,34 @@ export default {
       })
     },
 
+    /**
+     * 关闭菜单
+     **/
+    clickCollapse(bool){
+      this.isCollapse = bool;
+      if(this.isMobile){
+        this.dialogShow=true;
+        this.$nextTick(() => {
+          setTimeout(function () {
+            document.getElementById("transition_width").style.width="200px";
+          },10)
+        })
+      }
+    },
+    /**
+     * 关闭弹框
+     **/
+    clickDialogShow(bool){
+      this.isMobile=true;
+        let _this=this;
+        this.$nextTick(() => {
+          document.getElementById("transition_width").style.width="0px";
+          setTimeout(function () {
+            _this.dialogShow=bool;
+            _this.isCollapse = true;
+          },300)
+        })
+    },
     //获取全部菜单
     getAllMenuList(router){
       for (let i = 0; i < router.length; i++) {
@@ -125,4 +178,26 @@ export default {
 /deep/ .el-main {
   padding: 5px 0px 0px 0px;
 }
+
+#dialog{
+  display: flex;
+  height: 100%;
+}
+.box {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index:4000 ;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.transition_width{
+  transition: width .3s;
+  -moz-transition: width .3s; /* Firefox 4 */
+  -webkit-transition: width .3s; /* Safari 和 Chrome */
+  -o-transition: width .3s; /* Opera */
+}
+
 </style>
