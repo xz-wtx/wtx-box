@@ -10,9 +10,9 @@
             text-color="#bfcbd9"
             active-text-color="#409eff"
             :collapse="isCollapse">
-          <div style="display: flex;padding-top:30px;justify-content: center;" v-if="!isCollapse">
+          <div style="display: flex;padding-top:30px;justify-content: center;" >
             <img src="../../assets/logo.png" width="25">
-            <span style="color: white;font-size: 20px;">XX科技</span>
+            <span style="color: white;font-size: 20px;"><span v-if="!isCollapse">XX科技</span></span>
           </div>
           <tree-menu :dataList="menuDataList" class="child-item"></tree-menu>
         </el-menu>
@@ -82,6 +82,10 @@ export default {
   width: 200px;
   min-height: 100%;
 }
+ ::v-deep .el-menu--collapse {
+    width: 42px;
+}
+
 .child-item .el-menu-item{
   background-color: #1F2D3D!important;
 }

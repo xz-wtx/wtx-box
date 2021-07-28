@@ -16,9 +16,9 @@
       </el-aside>
 
       <!--pc端收起-->
-      <el-aside v-if="!dialogShow&&!isMobile" :width="!isCollapse?'200px':'45px'" style="transition:all 1s;">
-        <n-menu :is-collapse="isCollapse" :menu-data-list="menuDataList" ></n-menu>
-      </el-aside>
+
+        <n-menu v-if="!dialogShow&&!isMobile" :is-collapse="isCollapse" :menu-data-list="menuDataList" ></n-menu>
+
 
 
       <el-container>
