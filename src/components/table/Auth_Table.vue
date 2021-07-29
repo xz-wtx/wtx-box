@@ -268,7 +268,7 @@
         methods: {
           //按钮权限认证
           ButAuth(auth){
-            return auth===undefined?true:this.$store.getters.getMenuButtonList.indexOf(auth)>-1
+            return auth===undefined?true:this.$store.getters.getAuthButtonList.indexOf(auth)>-1
           },
           //登录人权限认证
           AccountAuth(account){

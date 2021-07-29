@@ -5,33 +5,33 @@ const token="token";
 const authButtonList="auth_button_list"
 
 
-function addUser(obj) {
+function saveUser(obj) {
     sessionStorage.setItem(user,JSON.stringify(obj));
 }
 
-function addToken(str) {
+function saveToken(str) {
     sessionStorage.setItem(token,str);
 }
 
-function addMenuList(list) {
+function saveMenuList(list) {
     sessionStorage.setItem(menuList,JSON.stringify(list));
 }
 
-function addAuthButtonList(list) {
+function saveAuthButtonList(list) {
     sessionStorage.setItem(authButtonList,JSON.stringify(list));
 }
 
-function getUser() {
+function findUser() {
     return JSON.parse(sessionStorage.getItem(user));
 }
-function getToken() {
+function findToken() {
     return sessionStorage.getItem(token);
 }
 
-function getMenuList() {
+function findMenuList() {
     return JSON.parse(sessionStorage.getItem(menuList));
 }
-function getAuthButtonList() {
+function findAuthButtonList() {
    return JSON.parse(sessionStorage.getItem(authButtonList));
 }
 
@@ -50,14 +50,14 @@ function remove(obj) {
 }
 
 export default {
-    addMenuList,
-    addUser,
-    addToken,
-    addAuthButtonList,
-    getMenuList,
-    getUser,
-    getToken,
-    getAuthButtonList,
+    saveMenuList,
+    saveUser,
+    saveToken,
+    saveAuthButtonList,
+    findMenuList,
+    findUser,
+    findToken,
+    findAuthButtonList,
     removeAll,
     remove,
 }
