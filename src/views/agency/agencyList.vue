@@ -8,7 +8,9 @@
         @loadData="load">
     </auth-table>
 
-
+    <el-dialog title="中介信息" v-model="dialogFormVisible">
+      <agency-edit ref="agency" @load="editAddLoad"></agency-edit>
+    </el-dialog>
   </div>
 </template>
 
@@ -47,6 +49,7 @@ export default {
             prop:'shopNo',
             label:'店铺编号',
             width:70,
+            func:this.rowsShopNo
           },
           {
             prop:'shopName',
@@ -129,30 +132,38 @@ export default {
   methods: {
     //editAddLoad 修改添加刷新
     editAddLoad() {
-      this.dialogFormVisible=false,
+      this.dialogFormVisible=false;
       this.option.data = [];
+      //重新查询数据
       this.$refs.search.queryData();
     },
+    //查询
     load(data) {
       this.option.data = [];
-      // this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
-      //   if (res.data.status == 200) {
-      //     this.option.data = res.data.data.list;
-      //     this.option.page.total = res.data.data.total;
-      //   } else {
-      //     this.$message.error(res.data.message)
-      //   }
-      // })
+      this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
+        if (res.data.status == 200) {
+          this.option.data = res.data.data.list;
+          this.option.page.total = res.data.data.total;
+        } else {
+          this.$message.error(res.data.message)
+        }
+      })
     },
+    //新增
     addAgency(){
       this.dialogFormVisible=true;
     },
+    //修改
     editRow(row){
       this.dialogFormVisible=true;
       this.$nextTick(() => {
-        this.$refs.shop_config.editRow(JSON.parse(JSON.stringify(row)));
+        this.$refs.agency.editRow(JSON.parse(JSON.stringify(row)));
       })
     },
+    //行字段点击
+    rowsShopNo(row,but){
+
+    }
   }
 }
 </script>
