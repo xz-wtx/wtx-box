@@ -27,7 +27,7 @@ export default {
                 shopName:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''}
               },
 
-          func:[{title:"添加",funName:this.addAgency,auth:""}],
+          func:[{title:"添加",funName:this.addAgency,auth:"",icon:''}],
           butNewlineLayout:false,
         },
         //是否首次加

@@ -81,7 +81,7 @@
                 <el-button type="primary" icon="el-icon-search" size="mini" @click="queryData()">搜索</el-button>
                 <el-button type="danger" icon="el-icon-delete" size="mini"  @click="clearData()">清空</el-button>
                 <span v-for="(func,index) in searchList.func" :key="index" style="margin-left: 10px">
-                   <el-button v-if="func.auth===''||func.auth==null||$store.getters.getMenuButtonList.indexOf(func.auth)>-1"  type="primary" @click="funClick(func)" :icon="func.icon" size="mini">{{func.title}}</el-button>
+                   <el-button v-if="func.auth===''||func.auth==null||$store.getters.getAuthButtonList.indexOf(func.auth)>-1"  type="primary" @click="funClick(func)" :icon="func.icon" size="mini">{{func.title}}</el-button>
                 </span>
               </div>
 
@@ -93,7 +93,7 @@
             <el-button type="primary" icon="el-icon-search" size="mini" @click="queryData()">搜索</el-button>
             <el-button type="danger" icon="el-icon-delete" size="mini"  @click="clearData()">清空</el-button>
             <span v-for="(func,index) in searchList.func" :key="index" style="margin-left: 10px">
-               <el-button v-if="func.auth===''||func.auth==null||$store.getters.getMenuButtonList.indexOf(func.auth)>-1"  type="primary" @click="funClick(func)" :icon="func.icon" size="mini">{{func.title}}</el-button>
+               <el-button v-if="func.auth===''||func.auth==null||$store.getters.getAuthButtonList.indexOf(func.auth)>-1"  type="primary" @click="funClick(func)" :icon="func.icon" size="mini">{{func.title}}</el-button>
             </span>
         </div>
 

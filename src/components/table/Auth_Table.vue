@@ -131,6 +131,7 @@
                         <el-button v-if="auth(but,scope)"
                                    @click="handle(but,scope.row,but)"
                                    type="text"
+                                   :icon="but.icon"
                                    size="small">
                           {{but.name}}
                         </el-button>
@@ -175,7 +176,8 @@
                     type:Boolean,
                     default :()=>false
                 },
-
+                //查询，搜索按钮布局
+                butNewlineLayout:false,
                 //是否首次加载
                 load:{
                   type:Boolean,
@@ -205,22 +207,31 @@
                         default:()=>0
                     },
                 },
+                //操作栏宽度
+                authButWidth:120,
+                //按钮
                 authBut:{
                   type:Array,
                   default:()=>[
                     // {func:Object, 方法名
                     // name:"",  名称
-                    // auth:""}, //权限
+                    // auth:"",//权限
+                    // icon:''},
                   ]
                 },
+                //开启多选框
                 checkbox:{
                     type: Boolean,
                     default:()=>false
                 },
+                //多选框选中数据
+                selectData:[],
+                //表字段
                 table:[{
                     type: Array,
                     default: () => []
                 }],
+                //表数据
                 data:{
                     type: Array,
                     default: () => []
