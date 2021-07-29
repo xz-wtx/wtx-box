@@ -21,16 +21,14 @@ function addRouter() {
             component: index,
             children: list
         }
-    router.options.routes.filter(p=>{
-        if(p.name==="Index"){
-            p.children=[];
-
-        }
+    router.options.routes=router.options.routes.filter(p=>{
+        return p.name!=='Index'
     })
 
     router.options.routes.push(objIndex);
     router.addRoute(objIndex);
     console.log("router:",router.options.routes)
+    router.push("/index")
 }
 
 function filterRouter(routers,files) { // 遍历后台传来的路由字符串，转换为组件对象
@@ -46,7 +44,7 @@ function filterRouter(routers,files) { // 遍历后台传来的路由字符串�
         }
 
         let obj= {
-            path: "/"+route.path,
+            path: route.path,
             name: route.name,
             component:comment,
             title:route.title,

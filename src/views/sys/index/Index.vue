@@ -32,16 +32,19 @@
            <setting></setting>
           </div>
           <el-divider style="margin:5px 0;"></el-divider>
-<!--          <n-tab></n-tab>-->
+        <!-- <n-tab></n-tab>-->
         </el-header>
         <el-main>
 
-
           <div class="content_div" >
-            <router-view v-slot="{ Component  }"  v-if="isRouterAlive">
+            <router-view v-slot="{ Component  }"  v-if="isRouterAlive&&$route.meta.keepAlive" >
               <keep-alive>
                 <component :is="Component"  />
               </keep-alive>
+            </router-view>
+
+            <router-view v-slot="{ Component  }"  v-if="isRouterAlive&&!$route.meta.keepAlive" >
+                <component :is="Component"  />
             </router-view>
           </div>
 

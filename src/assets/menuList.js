@@ -3,17 +3,25 @@ let menuDataList=[
         title:"数据汇总",
         name:"2eee",
         component:'sys/dashboard/Dashboard',
-        path:"dashboard",
+        path:"/index/dashboard",
         type:0,
         icon:'client',
+        closable:false,
+        meta:{
+            keepAlive:true
+        },
     },
     {
         title:"中介管理",
         name:"agencyList",
         component:'agency/agencyList',
-        path:"agencyList",
+        path:"/index/agencyList",
         type:0,
         icon:'client',
+        closable:true,
+        meta:{
+            keepAlive:true
+        },
     },
     {
         title:"客户线索",
@@ -27,11 +35,12 @@ let menuDataList=[
                 title:"客户管理",
                 name:"customerList",
                 component:'customer/customerList',
-                path:"customerList",
+                path:"/customerList",
                 icon:'client',
+                closable:true,
                 type:2,
                 meta:{
-                    keepAlive:true
+                    keepAlive:false
                 },
                 superList:[
                     {
@@ -44,9 +53,10 @@ let menuDataList=[
                 title:"市场备注",
                 name:"bazaarList",
                 component:'bazaar/bazaarList',
-                path:"bazaarList",
+                path:"/bazaarList",
                 icon:'client',
                 type:2,
+                closable:true,
                 meta:{
                     keepAlive:true
                 },
@@ -71,11 +81,11 @@ let menuDataList=[
                 title:"意向书管理",
                 name:"proposalList",
                 component:'proposal/proposalList',
-                path:"proposalList",
+                path:"/proposalList",
                 icon:'1',
                 type:2,
                 meta:{
-                    keepAlive:true
+                    keepAlive:false
                 },
                 superList:[
                     {
@@ -88,11 +98,11 @@ let menuDataList=[
                 title:"合同管理",
                 name:"contractList",
                 component:'contract/contractList',
-                path:"contractList",
+                path:"/contractList",
                 icon:'client',
                 type:2,
                 meta:{
-                    keepAlive:true
+                    keepAlive:false
                 },
                 superList:[
                     {
@@ -108,18 +118,24 @@ let menuDataList=[
         title:"账单管理",
         name:"billList",
         component:'bill/billList',
-        path:"billList",
+        path:"/billList",
         type:0,
         icon:'client',
+        meta:{
+            keepAlive:false
+        },
     },
 
     {
         title:"空间管理",
         name:"spaceList",
         component:'space/spaceList',
-        path:"spaceList",
+        path:"/spaceList",
         type:0,
         icon:'client',
+        meta:{
+            keepAlive:false
+        },
     },
 
     {
@@ -134,7 +150,7 @@ let menuDataList=[
                 title:"管理员列表",
                 name:"adminList",
                 component:'admin/adminList',
-                path:"adminList",
+                path:"/adminList",
                 icon:'client',
                 type:2,
                 meta:{
@@ -151,7 +167,7 @@ let menuDataList=[
                 title:"管理员日志",
                 name:"adminLog",
                 component:'admin/adminLog',
-                path:"adminLog",
+                path:"/adminLog",
                 icon:'client',
                 type:2,
                 meta:{

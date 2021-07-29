@@ -46,6 +46,10 @@ export default {
       if(typeof window.addBreadcrumb === "function"){
         window.addBreadcrumb(obj)
       }
+      /**
+       * bool(是否清空数据)
+       * path（清空数据的路由）
+       */
       this.$store.dispatch('setClearData',{bool:true,path:obj.path});
     }
   }

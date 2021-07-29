@@ -9,11 +9,11 @@ const routes = [
     name: "Login",
     component: Login,
   },
-  {
-    path: "/index",
-    name: "Index",
-    component: index,
-    children:[
+  // {
+  //   path: "/index",
+  //   name: "Index",
+  //   component: index,
+  //   children:[
       // {
       //   path: "/dashboard",
       //   name: "Dashboard",
@@ -42,8 +42,8 @@ const routes = [
       //     keepAlive:true
       //   }
       // }
-    ]
-  },
+  //   ]
+  // },
   {
     path: "/:catchAll(.*)",
     name: "404",

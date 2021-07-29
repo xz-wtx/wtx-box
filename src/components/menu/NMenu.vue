@@ -52,12 +52,7 @@ export default {
   watch:{
     $route: {
       handler: function (route) {
-        if(route.path.length>1){
-          this.defaultActive=route.path.toString().substring(1,route.path.toString().length)
-        }else{
           this.defaultActive=route.path;
-        }
-
       },
       immediate: true
     },

@@ -19,11 +19,7 @@ export default {
   data(){
     return{
       editableTabsValue: 'dashboard',
-      editableTabs: [{
-        title: '数据汇总',
-        name: '/dashboard',
-        closable:false
-      }],
+      editableTabs: [],
       tabIndex: 0
 
     }
@@ -39,21 +35,21 @@ export default {
           this.editableTabsValue = obj.path;
           return;
         }
-        if(this.editableTabs[i].name===("/"+obj.path)){
-          this.editableTabsValue="/"+obj.path
-          return;
-        }
       }
 
         this.editableTabs.push({
           title: obj.title,
           name: obj.path,
-          closable:true
+          closable:obj.closable
         });
       this.editableTabsValue = obj.path;
     },
     removeTab(targetName) {
       // //点击菜单重置子路由数据
+      /**
+       * bool(是否清空数据)
+       * path（清空数据的路由）
+       */
       this.$store.dispatch('setClearData',{bool:true,path:targetName});
 
       let tabs = this.editableTabs;
