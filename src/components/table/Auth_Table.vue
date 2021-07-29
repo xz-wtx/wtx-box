@@ -205,14 +205,13 @@
                         default:()=>0
                     },
                 },
-                //authBut:[
-                        // {func:Object, 方法名
-                        // name:"",  名称
-                        // auth:""}, //权限
-                //],
                 authBut:{
                   type:Array,
-                  default:()=>[]
+                  default:()=>[
+                    // {func:Object, 方法名
+                    // name:"",  名称
+                    // auth:""}, //权限
+                  ]
                 },
                 checkbox:{
                     type: Boolean,
