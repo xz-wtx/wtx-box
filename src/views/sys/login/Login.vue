@@ -6,6 +6,7 @@
 
 <script>
 import menuList from "@/assets/menuList";
+import store from "@/store";
 export default {
   name: "Login",
   mounted() {

@@ -3,10 +3,10 @@ import errer from "@/views/sys/errer/errer";
 import index from '../views/sys/index/Index';
 import layout from '../components/layout/common';
 import store from '../store'
+
 function addRouter() {
 
     let files = require.context('@/views/', true, /\.vue$/)
-
     const menuTreeList = JSON.parse(store.getters.getMenuList);
 
     if(menuTreeList===null||menuTreeList===undefined){
