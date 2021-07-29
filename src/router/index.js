@@ -1,7 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Login from "../views/sys/login/Login"
-import index from '../views/sys/index/Index'
 import errer from "@/views/sys/errer/errer";
+//页面加载进度条
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 const routes = [
   {
@@ -9,41 +11,6 @@ const routes = [
     name: "Login",
     component: Login,
   },
-  // {
-  //   path: "/index",
-  //   name: "Index",
-  //   component: index,
-  //   children:[
-      // {
-      //   path: "/dashboard",
-      //   name: "Dashboard",
-      //   component: Dashboard,
-      //   title:'数据汇总'
-      // },
-      // {
-      //   path: "/personal_details",
-      //   name: "personal_details",
-      //   component: personal_details,
-      //   title:'个人信息'
-      // },
-      // {
-      //   path: "/test",
-      //   name: "test",
-      //   component: test,
-      //   meta:{
-      //     keepAlive:true
-      //   }
-      // },
-      // {
-      //   path: "/abc",
-      //   name: "abc",
-      //   component: test1,
-      //   meta:{
-      //     keepAlive:true
-      //   }
-      // }
-  //   ]
-  // },
   {
     path: "/:catchAll(.*)",
     name: "404",
@@ -56,5 +23,24 @@ const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
   routes,
 });
+
+//NProgress配置
+NProgress.configure({
+  easing: 'ease',  // 动画方式
+  speed: 500,  // 递增进度条的速度
+  showSpinner: false, // 是否显示加载ico
+  trickleSpeed: 200, // 自动递增间隔
+  minimum: 0.3 // 初始化时的最小百分比
+})
+
+router.beforeEach((to, from , next) => {
+  // 每次切换页面时，调用进度条
+  NProgress.start();
+  next();
+});
+router.afterEach(() => {
+  // 在即将进入新的页面组件前，关闭掉进度条
+  NProgress.done()
+})
 
 export default router;

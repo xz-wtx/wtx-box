@@ -7,7 +7,7 @@ import store from '../store'
 function addRouter() {
 
     let files = require.context('@/views/', true, /\.vue$/)
-    const menuTreeList = JSON.parse(store.getters.getMenuList);
+    const menuTreeList = store.getters.getMenuList;
 
     if(menuTreeList===null||menuTreeList===undefined){
         return;

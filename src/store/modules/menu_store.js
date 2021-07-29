@@ -1,13 +1,13 @@
 import asyncRouter from "@/router/asyncRouter";
-
+import storage from "@/store/storage/storage";
 const state = {
-    menuList:sessionStorage.getItem("menuList"),
+    menuList:storage.getMenuList(),
 }
 
 const mutations = {
     SET_MENU_LIST(state,obj){
         state.menuList=obj;
-        sessionStorage.setItem("menuList",obj);
+        storage.addMenuList(obj);
         //加载路由
         asyncRouter.addRouter();
     },

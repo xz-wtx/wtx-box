@@ -12,7 +12,7 @@ export default {
   mounted() {
     let _this=this;
    setTimeout(function () {
-     _this.$store.dispatch('setMenuList',JSON.stringify(menuList));
+     _this.$store.dispatch('setMenuList',menuList);
    },1000)
   }
 }

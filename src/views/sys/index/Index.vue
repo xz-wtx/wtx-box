@@ -73,7 +73,7 @@ export default {
       isCollapse:false,
       menuList:[],
       isRouterAlive:true,
-      menuDataList:JSON.parse(this.$store.getters.getMenuList),
+      menuDataList:this.$store.getters.getMenuList,
       dialogShow:false,
       isMobile:false,
     }

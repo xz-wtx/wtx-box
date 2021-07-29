@@ -14,9 +14,9 @@ let HOST = process.env.NODE_ENV;
 
 axios.defaults.baseURL = 'http://localhost:8003';
 if (HOST === 'uat') {
-  axios.defaults.baseURL =  'http://172.18.172.86:8003';
+  axios.defaults.baseURL =  'http://localhost:8003';
 } else if (HOST === 'prod') {
-  axios.defaults.baseURL = 'http://cloud.chicmax.net:8003';
+  axios.defaults.baseURL = 'http://localhost:8003';
 }
 
 // 请求超时时间
