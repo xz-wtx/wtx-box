@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="height: 100%;">
     <div v-for="(data,index) in dataList" :key="index">
 
       <el-submenu :index="data.path" v-if="data.type===1" >
         <template #title >
           <svg-icon :iconClass="data.icon" class-name="" style="margin-right: 10px" v-if="data.icon!==undefined"/>
-          <span>{{ data.title }} </span>
+          <span v-show="!menuCollapse">{{ data.title }} </span>
         </template>
         <el-menu-item  @click="selectMenu(child)" :index="child.path" v-for="(child,index) in data.children" :key="index">
           <template #title >
@@ -34,6 +34,10 @@ export default {
       type:Array,
       // eslint-disable-next-line vue/require-valid-default-prop
       default:[],
+    },
+    menuCollapse:{
+      type: Boolean,
+      default:false,
     }
   },
   methods:{

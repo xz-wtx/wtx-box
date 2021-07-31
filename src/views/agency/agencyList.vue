@@ -15,8 +15,10 @@
 </template>
 
 <script>
+import AgencyEdit from "@/views/agency/agencyEdit";
 export default {
   name: "agencyList",
+  components: {AgencyEdit},
   data(){
     return{
       dialogFormVisible:false,
@@ -140,14 +142,14 @@ export default {
     //查询
     load(data) {
       this.option.data = [];
-      this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
-        if (res.data.status == 200) {
-          this.option.data = res.data.data.list;
-          this.option.page.total = res.data.data.total;
-        } else {
-          this.$message.error(res.data.message)
-        }
-      })
+      // this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
+      //   if (res.data.status == 200) {
+      //     this.option.data = res.data.data.list;
+      //     this.option.page.total = res.data.data.total;
+      //   } else {
+      //     this.$message.error(res.data.message)
+      //   }
+      // })
     },
     //新增
     addAgency(){

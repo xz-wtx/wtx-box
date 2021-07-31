@@ -10,11 +10,13 @@
             text-color="#bfcbd9"
             active-text-color="#409eff"
             :collapse="isCollapse">
-          <div style="display: flex;padding-top:30px;justify-content: center;" >
-            <img src="../../assets/logo.png" width="25">
-            <span style="color: white;font-size: 20px;"><span v-if="!isCollapse">XX科技</span></span>
+
+          <div   style="display: flex;padding-top:30px;justify-content: center;" >
+            <img  src="../../assets/logo.png" width="25" >
+            <span v-if="!isCollapse" style="color: white;font-size: 20px; white-space: nowrap;"><span >XX科技</span></span>
           </div>
-          <tree-menu :dataList="menuDataList" class="child-item"></tree-menu>
+
+          <tree-menu :dataList="menuDataList" :menuCollapse="isCollapse" class="child-item"></tree-menu>
         </el-menu>
       </el-row>
 
@@ -42,12 +44,12 @@ export default {
     };
   },
   created() {
-    window.addMenu=this.addMenu
+    window.addMenu=this.addMenu;
   },
   methods: {
     addMenu(defaultActive){
       this.defaultActive=defaultActive;
-    }
+    },
   },
   watch:{
     $route: {

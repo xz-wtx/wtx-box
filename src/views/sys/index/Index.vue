@@ -1,6 +1,7 @@
 <template>
     <el-container style="height: 100%">
 
+      <!--移动端展开-->
       <div class="box" v-if="dialogShow&&!isCollapse" >
         <div id="dialog">
           <el-aside v-if="dialogShow&&!isCollapse" width="0px"  id="transition_width" class="transition_width">
@@ -16,7 +17,6 @@
       </el-aside>
 
       <!--pc端收起-->
-
         <n-menu v-if="!dialogShow&&!isMobile" :is-collapse="isCollapse" :menu-data-list="menuDataList" ></n-menu>
 
 
@@ -202,5 +202,6 @@ export default {
   -webkit-transition: width .3s; /* Safari 和 Chrome */
   -o-transition: width .3s; /* Opera */
 }
+
 
 </style>
