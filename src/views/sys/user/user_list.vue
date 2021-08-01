@@ -110,6 +110,7 @@ export default {
 
     //查询
     load(data) {
+      alert(JSON.stringify(data))
       this.option.data = [{type:1}];
       // this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
       //   if (res.data.status == 200) {

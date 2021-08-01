@@ -36,18 +36,18 @@
         </el-header>
         <el-main>
 
-          <div class="content_div" >
-            <router-view v-slot="{ Component  }"  v-if="isRouterAlive&&$route.meta.keepAlive" >
-              <keep-alive>
-                <component :is="Component"  />
-              </keep-alive>
-            </router-view>
 
-            <router-view v-slot="{ Component  }"  v-if="isRouterAlive&&!$route.meta.keepAlive" >
-                <component :is="Component"  />
-            </router-view>
-          </div>
+           <div class="content_div" >
+             <div class="content_div" >
+               <router-view v-slot="{ Component  }"  v-if="isRouterAlive" >
+                 <keep-alive>
+                   <component :is="Component"   v-show="$route.meta.keepAlive"/>
+                 </keep-alive>
+               </router-view>
 
+               <router-view v-if="isRouterAlive&&!$route.meta.keepAlive" ></router-view>
+             </div>
+           </div>
 
 
         </el-main>

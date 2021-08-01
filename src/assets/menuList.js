@@ -76,6 +76,9 @@ let menuDataList=[
         type:1,
         component:'common',
         icon:'client',
+        meta:{
+            keepAlive:true
+        },
         children:[
             {
                 title:"意向书管理",
@@ -102,7 +105,7 @@ let menuDataList=[
                 icon:'client',
                 type:2,
                 meta:{
-                    keepAlive:false
+                    keepAlive:true
                 },
                 superList:[
                     {

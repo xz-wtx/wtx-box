@@ -1,13 +1,19 @@
 <template>
   <!--合同管理-->
-  <div>
+  <div style="height: 100%">
     contractList
+    <input v-model="f">
   </div>
 </template>
 
 <script>
 export default {
-  name: "contractList"
+  name: "contractList",
+  data(){
+    return{
+      f:0
+    }
+  }
 }
 </script>
 
