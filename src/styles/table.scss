@@ -1,0 +1,29 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 15px;
+}
+
+.container::v-deep(.el-select){
+  width: 100%;
+}
+.container::v-deep(.select-trigger){
+  width: 100%;
+}
+.container ::v-deep(.el-input__inner) {
+  padding-right: 30px;
+  width: 100% ;
+  //height: 30px;
+}
+
+::v-deep(.el-form-item__content .el-input__inner){
+  width: 100% ;
+}
+.container ::v-deep(.el-form-item__label) {
+  text-align: right;
+  width: 110px !important;
+  font-size: 12px;
+}
+.container .el-form-item{
+  margin-bottom: 7px;
+}

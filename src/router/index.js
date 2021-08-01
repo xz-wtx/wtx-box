@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Login from "../views/sys/login/Login"
-import errer from "@/views/sys/errer/errer";
+import Login from "../views/base/login/Login"
+import errer from "@/views/base/errer/errer";
 //页面加载进度条
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'

@@ -1,4 +1,4 @@
-import Login from "@/views/sys/login/Login";
+import Login from "@/views/base/login/Login";
 export  default {
   Login
 }

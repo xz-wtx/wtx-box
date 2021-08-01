@@ -1,6 +1,6 @@
 import router from '../router/index'
-import errer from "@/views/sys/errer/errer";
-import index from '../views/sys/index/Index';
+import errer from "@/views/base/errer/errer";
+import index from '../views/base/index/Index';
 import layout from '../components/layout/common';
 import store from '../store'
 

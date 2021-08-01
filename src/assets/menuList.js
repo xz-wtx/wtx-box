@@ -179,6 +179,23 @@ let menuDataList=[
                         path:''
                     }
                 ]
+            },
+            {
+                title:"用户列表",
+                name:"user_list",
+                component:'sys/user/user_list',
+                path:"/user_list",
+                icon:'client',
+                type:2,
+                meta:{
+                    keepAlive:true
+                },
+                superList:[
+                    {
+                        title:'管理员',
+                        path:''
+                    }
+                ]
             }
         ]
     },

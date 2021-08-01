@@ -11,13 +11,15 @@
 
         <!--显示隐藏类型-->
         <el-drawer
+
                 title="列显隐"
                 v-model="drawer"
                 size="50%"
                 :with-header="false">
             <div style="margin-top: 50px;margin-left: 10%">
                 <el-transfer
-                        v-model="showTitle"
+                        :titles="['隐藏列', '显示列']"
+                        v-model="hideTitle"
                         :props="{
                           key: 'prop',
                           label: 'label'
@@ -41,7 +43,7 @@
         <el-table
 
                 :height="optionData.height"
-                v-if="showDataTitle.length>0"
+                v-if="showTitle.length>0"
                 ref="multipleTable"
                 :data="optionData.data"
                 tooltip-effect="dark"
@@ -61,11 +63,10 @@
                 :header-cell-style="cellStyle"
                  :cell-style="{padding:'5px 0'}">
 
-          <el-table-column v-if="optionData.checkbox"
-                    type="selection">
+          <el-table-column v-if="optionData.checkbox" type="selection">
             </el-table-column>
                 <el-table-column
-                        v-for="(item,index) in showDataTitle"
+                        v-for="(item,index) in showTitle"
                         :key="index"
                         :prop="item.prop"
                         :label="item.label"
@@ -141,7 +142,7 @@
             </el-table-column>
         </el-table>
 
-
+        <!--分页-->
         <div class="block" v-if="optionData.pageLoad">
             <el-pagination
                     background
@@ -154,6 +155,9 @@
                     :total="optionData.page.total">
             </el-pagination>
         </div>
+
+      <slot name="view"></slot>
+
     </div>
 </template>
 
@@ -170,7 +174,16 @@
                     type: Array,
                     default:()=>{}
                 },
-
+                //弹窗关闭
+                show_1:{
+                    type:Boolean,
+                    default :()=>false
+                  },
+                //弹窗关闭
+                show_2:{
+                  type:Boolean,
+                  default :()=>false
+                },
                 //是否显示隐藏字段按钮
                 showTitleBut:{
                     type:Boolean,
@@ -246,8 +259,8 @@
                 newOptionData:{},//保留当前Option数据
 
                 drawer:false,
-                showTitle: [],
-                showDataTitle:[],
+                showTitle: [],//
+                hideTitle:[],
 
                 mapUrlData:[],
                 mapUrlList:[],
@@ -257,21 +270,20 @@
 
         watch:{
             //显示，隐藏字段
-            showTitle(value){
-                let _this=this;
-                let tables=this.optionData.table;
-                _this.showDataTitle=[];
-                setTimeout(function () {
-                    tables.forEach(function (data) {
-                        value.forEach(function (old) {
-                            if(data.prop===old){
-                                data.hide=true;
-                                _this.showDataTitle.push(data);
-                            }
-                        })
-                    })
-                },100);
-
+          hideTitle(value){
+            let _this=this;
+            let tables=this.optionData.table;
+            _this.showTitle=[];
+            setTimeout(function () {
+              tables.forEach(function (data) {
+                value.forEach(function (old) {
+                  if(data.prop===old){
+                    data.hide=true;
+                    _this.showTitle.push(data);
+                  }
+                })
+              })
+            },100);
             },
         },
 
@@ -345,10 +357,6 @@
                 return item.option;
               })
             }
-
-
-
-
           },
           //远程搜索
           queryUnit(queryString, cb,url){
@@ -382,6 +390,28 @@
                 let page = {pageSizes:this.optionData.page.pageSizes,pageSize: this.optionData.page.pageSize,total:0,currentPage:1};
                 const  assign= Object.assign(page,this.getSearchValue());
                 this.$emit("load-data",assign);
+            },
+          /**
+           *条件查询数据
+           **/
+          queryData_all(){
+            this.newOptionData.show_1=false;
+            this.newOptionData.show_2=false;
+            this.queryData();
+          },
+            /**
+             *条件查询数据
+             **/
+            queryData_1(){
+              this.newOptionData.show_1=false;
+              this.queryData();
+            },
+            /**
+             *条件查询数据
+             **/
+            queryData_2(){
+              this.newOptionData.show_2=false;
+              this.queryData();
             },
 
             /**
@@ -508,13 +538,13 @@
             showTitleEvent(){
                 let _this=this;
                 let tables=this.optionData.table;
-                _this.showDataTitle=[];
+                _this.showTitle=[];
                 tables.forEach(function (data) {
-                    _this.showDataTitle.push(data);
-                    if(data.hide===undefined||data.hide){
-                        _this.showTitle.push(data.prop)
+                    if(data.hide){
+                        _this.hideTitle.push(data.prop)
+                    }else{
+                      _this.showTitle.push(data);
                     }
-
                 })
             },
 
