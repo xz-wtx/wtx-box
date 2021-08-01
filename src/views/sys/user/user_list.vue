@@ -67,7 +67,6 @@ export default {
           {
             prop:'userPhone',
             label:'手机号',
-            hide: true
           },
           {
             prop: "type",
@@ -94,6 +93,36 @@ export default {
               return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
             }
           },
+          // {
+          //   prop:'amount',
+          //   label:'转款金额',
+          //   edit:true,//开启编辑
+          //   editApply:"id",//id值存在就不可编辑
+          //   type:'input',
+          // },
+          // {
+          //   prop:'companyName',
+          //   label:'公司名称',
+          //   edit:true,//开启编辑
+          //   editApply:"id",//id值存在就不可编辑
+          //   type:'filterInput',//远程搜索
+          //   alias:"companyCode",
+          //   url:this.$api.companyApi.companyNameList,//路径
+          // },
+          // {
+          //   prop:'abstractCode',
+          //   label:'摘要',
+          //   edit:true,//开启编辑
+          //   editApply:"id",//id值存在就不可编辑
+          //   type:'select',
+          //   options:[{
+          //     value: 'ZCZK',
+          //     label: 'ZCZK'
+          //   },{
+          //     value: 'DZTZ',
+          //     label: 'DZTZ'
+          //   }]
+          // },
         ],
         //操作栏宽度
         authButWidth:120,
