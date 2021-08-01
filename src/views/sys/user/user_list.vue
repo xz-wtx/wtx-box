@@ -25,7 +25,7 @@ export default {
     return{
 
       option: {
-        //弹窗关闭（show_1，show_2）
+        //弹窗关闭（show_1，show_2。。。）
         show_1:false,
         //搜索
         searchList: {
@@ -39,11 +39,12 @@ export default {
           //按钮布局是否跟在查询款后面
           butNewlineLayout:false,
         },
-        showTitleBut:true,
+        //是否开启隐藏字段
+        openFieldHide:true,
         //是否首次加
         load:true,
         //开启分页
-        pageLoad:true,
+        openPageLoad:true,
         //页大小默认10
         page:{
           currentPage:1,
@@ -51,27 +52,27 @@ export default {
           total:0,
         },
         //是否开启多选
-        checkbox:false,
+        openCheckbox:false,
         //多选框选中数据
         selectData:[],
         table:[
           {
             prop:'userName',
             label:'用户名',
-            func:this.userName,
-            hide: true
+            func:this.userName,//函数
+            width:180,//宽度
+            showOverflowTooltip: true,//提示
+            hide: true//是否隐藏字段
           },
           {
             prop:'userPhone',
             label:'手机号',
-            width:180,
-            showOverflowTooltip: true,
             hide: true
           },
           {
             prop: "type",
             label: "类型",
-            render(row) {
+            render(row) {//格式
               if (row.type == 0) {
                 return '<div style="color:#ff0016">在线</div>'
               }else {
@@ -98,8 +99,9 @@ export default {
         authButWidth:120,
         //操作
         authBut:[
-          {name:"修改",func:this.editRow},
+          {name:"修改",func:this.editRow},//权限
           {name:"删除",func:this.delRow},
+         // {name:"修改",func:this.editRow,authType:[2,3],field:"status",value:[3],account:"userAccount"},
         ],
         //列表数据
         data: [],

@@ -32,7 +32,7 @@
 
         <!--显示隐藏按钮-->
         <div style="display: flex">
-            <div style="flex: 1;text-align: right;margin-right: 50px" v-if="optionData.showTitleBut">
+            <div style="flex: 1;text-align: right;margin-right: 50px" v-if="optionData.openFieldHide">
                 <el-tooltip content="显隐" placement="top" >
                     <i class="el-icon-s-operation" @click="drawer = true" ></i>
                 </el-tooltip>
@@ -63,7 +63,7 @@
                 :header-cell-style="cellStyle"
                  :cell-style="{padding:'5px 0'}">
 
-          <el-table-column v-if="optionData.checkbox" type="selection">
+          <el-table-column v-if="optionData.openCheckbox" type="selection">
             </el-table-column>
                 <el-table-column
                         v-for="(item,index) in showTitle"
@@ -143,7 +143,7 @@
         </el-table>
 
         <!--分页-->
-        <div class="block" v-if="optionData.pageLoad">
+        <div class="block" v-if="optionData.openPageLoad">
             <el-pagination
                     background
                     @size-change="handleSizeChange"
@@ -185,7 +185,7 @@
                   default :()=>false
                 },
                 //是否显示隐藏字段按钮
-                showTitleBut:{
+                openFieldHide:{
                     type:Boolean,
                     default :()=>false
                 },
@@ -197,7 +197,7 @@
                   default :()=>false
                 },
                 //分页加载数据
-                pageLoad:{
+                openPageLoad:{
                     type:Boolean,
                     default :()=>false
                 },
@@ -233,7 +233,7 @@
                   ]
                 },
                 //开启多选框
-                checkbox:{
+                openCheckbox:{
                     type: Boolean,
                     default:()=>false
                 },
@@ -297,35 +297,35 @@
             return account!==undefined?account.indexOf(this.$store.getters.getUser.account)>-1:true
           },
           auth(but,scope){
-            if(but.type===undefined){
+            if(but.authType===undefined){
               return true;
             }
 
             let bool=true;
-            if(but.type.indexOf(1)>-1){
+            if(but.authType.indexOf(1)>-1){
               //只判断是否有按钮权限
               bool =this.ButAuth(but.auth)
               if(!bool){
                 return false;
               }
             }
-            if (but.type.indexOf(2)>-1){
+            if (but.authType.indexOf(2)>-1){
               //只判断登录人和指定人是否相等权限
               bool =this.AccountAuth(scope.row[but.account])
               if(!bool){
                 return false;
               }
             }
-            if (but.type.indexOf(3)>-1){
+            if (but.authType.indexOf(3)>-1){
               //只判断指定值是包含指定类型字段的值
-              bool= but.showValue.indexOf(scope.row[but.showName])>-1
+              bool= but.value.indexOf(scope.row[but.field])>-1
               if(!bool){
                 return false;
               }
             }
-            if (but.type.indexOf(4)>-1){
+            if (but.authType.indexOf(4)>-1){
               //判断指定值不包含指定类型字段的值
-              bool= but.showValue.indexOf(scope.row[but.showName])===-1
+              bool= but.value.indexOf(scope.row[but.field])===-1
               if(!bool){
                 return false;
               }
@@ -341,6 +341,7 @@
             let matches = re.exec(tmp);//方法名
             let methodName=matches[1];
 
+            //从缓存结果找
             if(this.mapUrlList.indexOf(methodName)>-1){
              let mapUrlData= this.mapUrlData;
               for (const reKey in mapUrlData) {
@@ -353,6 +354,7 @@
               this.mapUrlList.push(methodName)
               url({}).then(res=>{
                 item.option=res.data.data;
+                //缓存结果
                 this.mapUrlData.push({methodName:methodName,data:item.option})
                 return item.option;
               })
@@ -486,7 +488,7 @@
               this.$emit('update:optionData',this.newOptionData)
                 let page={pageSizes:this.optionData.page.pageSizes,pageSize: this.newOptionData.page.pageSize,total: this.optionData.page.total,currentPage:1};
                 this.$emit("page",page);
-                let bool=this.optionData.pageLoad;
+                let bool=this.optionData.openPageLoad;
 
                 if(bool){
                     let data=Object.assign(this.getSearchValue(),page);
@@ -503,7 +505,7 @@
               this.currentPage=val;
                 let page={pageSizes:this.optionData.page.pageSizes,pageSize: this.optionData.page.pageSize,total:this.optionData.page.total,currentPage:val};
                 this.$emit("page",page);
-                let bool=this.optionData.pageLoad;
+                let bool=this.optionData.openPageLoad;
                 if(bool){
                     let data=Object.assign(this.getSearchValue(),page);
                     this.$emit("load-data",data)
@@ -558,7 +560,7 @@
           this.showTitleEvent();
             let bool=this.optionData.load;
             if(bool){
-              if(this.optionData.pageLoad){
+              if(this.optionData.openPageLoad){
                 //page={pageSizes:this.optionData.page.pageSizes,pageSize: this.optionData.page.pageSize,total:0,currentPage:1};
                 this.queryData()
               }else{
