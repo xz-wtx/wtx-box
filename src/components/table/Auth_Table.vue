@@ -1,7 +1,6 @@
 <template>
     <div  class="auth_table">
         <CM_search :search-list="optionData.searchList" v-if="optionData.searchList!==undefined"></CM_search>
-
       <!--缩进10px-->
       <div style="padding-left: 10px">
         <slot name="slot_1" ></slot>
@@ -10,40 +9,12 @@
         <slot name="slot_2"></slot>
 
         <!--显示隐藏类型-->
-        <el-drawer
-
-                title="列显隐"
-                v-model="drawer"
-                size="50%"
-                :with-header="false">
-            <div style="margin-top: 50px;margin-left: 10%">
-                <el-transfer
-                        :titles="['隐藏列', '显示列']"
-                        v-model="hideTitle"
-                        :props="{
-                          key: 'prop',
-                          label: 'label'
-                        }"
-                        :data="optionData.table"/>
-            </div>
-        </el-drawer>
-
-
-
-        <!--显示隐藏按钮-->
-        <div style="display: flex">
-            <div style="flex: 1;text-align: right;margin-right: 50px" v-if="optionData.openFieldHide">
-                <el-tooltip content="显隐" placement="top" >
-                    <i class="el-icon-s-operation" @click="drawer = true" ></i>
-                </el-tooltip>
-            </div>
-        </div>
+      <m_transfer :option-data="optionData"  ref="transfer"></m_transfer>
 
         <!--  常用一般table-->
         <el-table
 
                 :height="optionData.height"
-                v-if="showTitle.length>0"
                 ref="multipleTable"
                 :data="optionData.data"
                 tooltip-effect="dark"
@@ -66,7 +37,7 @@
           <el-table-column v-if="optionData.openCheckbox" type="selection">
             </el-table-column>
                 <el-table-column
-                        v-for="(item,index) in showTitle"
+                        v-for="(item,index) in (optionData.table.filter(t=>!t.hide))"
                         :key="index"
                         :prop="item.prop"
                         :label="item.label"
@@ -81,37 +52,17 @@
                       </el-tooltip>
                       <div v-else>
                         <span v-if="item.render" v-html="item.render(scope.row)" @click="handle(item,scope.row,scope.row[item.prop])"></span>
+
                         <span v-else @click="handle(item,scope.row,scope.row[item.prop])">
                               <span v-if="item.edit&&(item.editAudit!==undefined?(scope.row[item.editApply]===undefined?true:scope.row[item.editApply]!==scope.row[item.editAudit]):(item.editApply===undefined?true:scope.row[item.editApply]===undefined))">
+
                                 <!--输入框-->
-                                <el-input  size="mini" v-if="item.type==='input'" v-model="scope.row[item.prop]" :placeholder="item.placeholder"></el-input>
+                                <m_input :scope="scope.row"  :item="item" ></m_input>
                                 <!--下拉框-->
-                                      <el-select  size="mini" v-if="item.type==='select'"  v-model="scope.row[item.prop]" :placeholder="item.placeholder">
-                                        <el-option
-                                        v-for="item in item.options===undefined?queryOptions(item,item.url):item.options "
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
-                                    </el-option>
-                                </el-select>
-
-
-
+                                <m_select  :scope="scope.row" :item="item" ></m_select>
                                 <!--远程搜索框-->
-                                <el-autocomplete
-                                    :style="{'width': (item.width-40)+'px'}"
-                                    size="mini"
-                                    v-if="item.type==='filterInput'"
-                                    v-model="scope.row[item.prop+'FilterTitle']"
-                                    value-key="title"
-                                    :fetch-suggestions="((queryString,cb)=>{queryUnit(queryString,cb,item.url)})"
-                                    placeholder="请输入内容"
-                                    @select="((ite)=>{handleSelect(ite,scope.row,item.prop,item.alias)})"
-                                    >
-                                </el-autocomplete>
-
-
-                          </span>
+                                <m_autocomplete :scope="scope.row" :item="item"  ></m_autocomplete>
+                              </span>
 
                           <span v-else> {{scope.row[item.prop]}}</span>
                         </span>
@@ -127,18 +78,9 @@
                     :min-width="optionData.authButWidth===undefined?'200':optionData.authButWidth"
                     >
                 <template #default="scope" style="text-align: center">
-                    <div  v-for="(but,index) in optionData.authBut"
-                           :key="index" style="margin-left: 10px">
-                        <el-button v-if="auth(but,scope)"
-                                   @click="handle(but,scope.row,but)"
-                                   type="text"
-                                   :icon="but.icon"
-                                   size="small">
-                          {{but.name}}
-                        </el-button>
-
-                    </div>
+                  <m_auth :scope="scope" :option-data="optionData"></m_auth>
                 </template>
+
             </el-table-column>
         </el-table>
 
@@ -164,68 +106,39 @@
 <script>
 
     import CM_search from "../search/CM_search";
+    import m_input from "@/components/table/comp/input/m_input";
+    import m_select from "@/components/table/comp/select/m_select";
+    import m_autocomplete from "@/components/table/comp/autocomplete/m_autocomplete";
+    import m_auth from "@/components/table/comp/auth/m_auth";
+    import m_transfer from "@/components/table/comp/transfer/m_transfer";
     export default {
         name: "CM-Table",
-        components: {CM_search},
+        components: {m_transfer, m_auth, m_autocomplete, m_select, m_input, CM_search},
         props:{
             optionData:{
                 //搜索和事件
-                searchList:{
-                    type: Array,
-                    default:()=>{}
-                },
+                searchList:{type: Array,default:()=>{} },
                 //弹窗关闭
-                show_1:{
-                    type:Boolean,
-                    default :()=>false
-                  },
+                show_1:{ type:Boolean, default :()=>false },
                 //弹窗关闭
-                show_2:{
-                  type:Boolean,
-                  default :()=>false
-                },
+                show_2:{ type:Boolean,default :()=>false},
                 //是否显示隐藏字段按钮
-                openFieldHide:{
-                    type:Boolean,
-                    default :()=>false
-                },
+                openFieldHide:{type:Boolean,default :()=>false},
                 //查询，搜索按钮布局
                 butNewlineLayout:false,
                 //是否首次加载
-                load:{
-                  type:Boolean,
-                  default :()=>false
-                },
+                load:{ type:Boolean, default :()=>false },
                 //分页加载数据
-                openPageLoad:{
-                    type:Boolean,
-                    default :()=>false
-                },
+                openPageLoad:{ type:Boolean,default :()=>false},
                 //分页
-                page:{
-                    pageSizes:{
-                        type: Array,
-                        default:()=>[10, 20, 30, 40]
-                    },
-                    currentPage:{
-                        type: Number,
-                        default:()=>0
-                    },
-                    pageSize:{
-                        type: Number,
-                        default:()=>10
-                    },
-                    total:{
-                        type: Number,
-                        default:()=>0
-                    },
-                },
+                page:{pageSizes:{ type: Array, default:()=>[10, 20, 30, 40] },
+                    currentPage:{type: Number,default:()=>0},
+                    pageSize:{type: Number, default:()=>10},
+                    total:{type: Number, default:()=>0 }},
                 //操作栏宽度
                 authButWidth:120,
                 //按钮
-                authBut:{
-                  type:Array,
-                  default:()=>[
+                authBut:{ type:Array, default:()=>[
                     // {func:Object, 方法名
                     // name:"",  名称
                     // auth:"",//权限
@@ -233,23 +146,13 @@
                   ]
                 },
                 //开启多选框
-                openCheckbox:{
-                    type: Boolean,
-                    default:()=>false
-                },
+                openCheckbox:{type: Boolean, default:()=>false },
                 //多选框选中数据
                 selectData:[],
                 //表字段
-                table:[{
-                    type: Array,
-                    default: () => []
-                }],
+                table:[{ type: Array,default: () => []}],
                 //表数据
-                data:{
-                    type: Array,
-                    default: () => []
-                },
-
+                data:{type: Array,default: () => [] },
             },
 
         },
@@ -257,130 +160,10 @@
             return{
                 currentPage:0,
                 newOptionData:{},//保留当前Option数据
-
-                drawer:false,
-                showTitle: [],//
-                hideTitle:[],
-
-                mapUrlData:[],
-                mapUrlList:[],
-
             }
-        },
-
-        watch:{
-            //显示，隐藏字段
-          hideTitle(value){
-            let _this=this;
-            let tables=this.optionData.table;
-            _this.showTitle=[];
-            setTimeout(function () {
-              tables.forEach(function (data) {
-                value.forEach(function (old) {
-                  if(data.prop===old){
-                    data.hide=true;
-                    _this.showTitle.push(data);
-                  }
-                })
-              })
-            },100);
-            },
         },
 
         methods: {
-          //按钮权限认证
-          ButAuth(auth){
-            return auth===undefined?true:this.$store.getters.getAuthButtonList.indexOf(auth)>-1
-          },
-          //登录人权限认证
-          AccountAuth(account){
-            return account!==undefined?account.indexOf(this.$store.getters.getUser.account)>-1:true
-          },
-          auth(but,scope){
-            if(but.authType===undefined){
-              return true;
-            }
-
-            let bool=true;
-            if(but.authType.indexOf(1)>-1){
-              //只判断是否有按钮权限
-              bool =this.ButAuth(but.auth)
-              if(!bool){
-                return false;
-              }
-            }
-            if (but.authType.indexOf(2)>-1){
-              //只判断登录人和指定人是否相等权限
-              bool =this.AccountAuth(scope.row[but.account])
-              if(!bool){
-                return false;
-              }
-            }
-            if (but.authType.indexOf(3)>-1){
-              //只判断指定值是包含指定类型字段的值
-              bool= but.value.indexOf(scope.row[but.field])>-1
-              if(!bool){
-                return false;
-              }
-            }
-            if (but.authType.indexOf(4)>-1){
-              //判断指定值不包含指定类型字段的值
-              bool= but.value.indexOf(scope.row[but.field])===-1
-              if(!bool){
-                return false;
-              }
-            }
-
-            return bool;
-          },
-
-          //动态获取下拉框的值
-          queryOptions(item,url){
-            let tmp = url.toString();
-            let re = /function\s*(\w*)/i;
-            let matches = re.exec(tmp);//方法名
-            let methodName=matches[1];
-
-            //从缓存结果找
-            if(this.mapUrlList.indexOf(methodName)>-1){
-             let mapUrlData= this.mapUrlData;
-              for (const reKey in mapUrlData) {
-                if(mapUrlData[reKey].methodName==methodName){
-                  return item.option;
-                }
-              }
-            }else{
-              //保存请求的url
-              this.mapUrlList.push(methodName)
-              url({}).then(res=>{
-                item.option=res.data.data;
-                //缓存结果
-                this.mapUrlData.push({methodName:methodName,data:item.option})
-                return item.option;
-              })
-            }
-          },
-          //远程搜索
-          queryUnit(queryString, cb,url){
-            let result=[];
-            url({title:queryString}).then(res => {
-              if (res.data.status==200) {
-                result = res.data.data;
-              }
-              cb(result);
-            }).catch(err=>{
-              cb([]);
-            })
-          },
-          //远程搜索选中
-          handleSelect  (item,obj,name,alias) {
-            obj[name]=item.value;
-            if(alias!==undefined){
-              obj[alias]=item.value;
-              obj[alias+"value"]=item.value;
-            }
-
-          },
             /**
              *条件查询数据
              **/
@@ -420,7 +203,6 @@
              * 清空条件数据
              **/
             clearData(){
-
                 let obj=this.optionData.searchList.list;
               for (let [key, value] of Object.entries(obj)) {
                 if(value.disabled===undefined){
@@ -433,7 +215,6 @@
 
             //搜索框实时通知，通知参数有所改变（全部）
             realTime(){
-
               let page={pageSize: this.optionData.page.pageSize,total:this.optionData.page.total,currentPage:this.optionData.page.currentPage};
               const  assignData= Object.assign(page,this.getSearchValue());
               this.$emit("real-time",assignData);
@@ -444,7 +225,6 @@
                 let page={pageSize: this.optionData.page.pageSize,total:this.optionData.page.total,currentPage:this.optionData.page.currentPage};
                 const  assignData= Object.assign(page,this.getSearchValue());
                 //事件， 事件对象，查询和分页数据
-               //this.$emit(data.funName,1data,assignData)
               if(data.funName!==undefined) {
                 if (typeof data.funName === "function") {
                   data.funName(data, assignData)
@@ -459,7 +239,6 @@
               this.newOptionData=this.optionData;
               this.newOptionData.selectData=val;
               this.$emit('update:optionData',this.newOptionData)
-              //this.$emit("box-select-data",val);
             },
 
 
@@ -498,7 +277,6 @@
 
             },
             handleCurrentChange(val) {
-
               if( this.currentPage===val){
                   return;
                 }
@@ -536,19 +314,6 @@
               }
               return obj;
             },
-            //隐藏字段
-            showTitleEvent(){
-                let _this=this;
-                let tables=this.optionData.table;
-                _this.showTitle=[];
-                tables.forEach(function (data) {
-                    if(data.hide){
-                        _this.hideTitle.push(data.prop)
-                    }else{
-                      _this.showTitle.push(data);
-                    }
-                })
-            },
 
             //标题样式
             cellStyle() {
@@ -557,11 +322,12 @@
 
         },
         mounted() {
-          this.showTitleEvent();
+          this.$nextTick(() => {
+            this.$refs.transfer.showTitleEvent();
+          });
             let bool=this.optionData.load;
             if(bool){
               if(this.optionData.openPageLoad){
-                //page={pageSizes:this.optionData.page.pageSizes,pageSize: this.optionData.page.pageSize,total:0,currentPage:1};
                 this.queryData()
               }else{
                 let page={pageSizes:1,pageSize:100000,currentPage:1};

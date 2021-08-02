@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%;">
-
+{{option}}
     <auth-table
         ref="search"
         :optionData.sync="option"
@@ -11,6 +11,7 @@
         </el-dialog>
       </template>
     </auth-table>
+
 
 
   </div>
@@ -93,13 +94,13 @@ export default {
               return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
             }
           },
-          // {
-          //   prop:'amount',
-          //   label:'转款金额',
-          //   edit:true,//开启编辑
-          //   editApply:"id",//id值存在就不可编辑
-          //   type:'input',
-          // },
+          {
+            prop:'amount',
+            label:'转款金额',
+            edit:true,//开启编辑
+            editApply:"id",//id值存在就不可编辑
+            type:'input',
+          },
           // {
           //   prop:'companyName',
           //   label:'公司名称',
@@ -109,26 +110,26 @@ export default {
           //   alias:"companyCode",
           //   url:this.$api.companyApi.companyNameList,//路径
           // },
-          // {
-          //   prop:'abstractCode',
-          //   label:'摘要',
-          //   edit:true,//开启编辑
-          //   editApply:"id",//id值存在就不可编辑
-          //   type:'select',
-          //   options:[{
-          //     value: 'ZCZK',
-          //     label: 'ZCZK'
-          //   },{
-          //     value: 'DZTZ',
-          //     label: 'DZTZ'
-          //   }]
-          // },
+          {
+            prop:'abstractCode',
+            label:'摘要',
+            edit:true,//开启编辑
+            editApply:"id",//id值存在就不可编辑
+            type:'select',
+            options:[{
+              value: 'ZCZK',
+              label: 'ZCZK'
+            },{
+              value: 'DZTZ',
+              label: 'DZTZ'
+            }]
+          },
         ],
         //操作栏宽度
         authButWidth:120,
         //操作
         authBut:[
-          {name:"修改",func:this.editRow},//权限
+          {name:"修改",func:this.editRow,authType:[3],field:"type",value:[1]},//权限
           {name:"删除",func:this.delRow},
          // {name:"修改",func:this.editRow,authType:[2,3],field:"status",value:[3],account:"userAccount"},
         ],
@@ -142,7 +143,7 @@ export default {
     //查询
     load(data) {
       alert(JSON.stringify(data))
-      this.option.data = [{type:1}];
+      this.option.data = [{type:1},{type:2}];
       // this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
       //   if (res.data.status == 200) {
       //     this.option.data = res.data.data.list;
