@@ -13,7 +13,7 @@ const mutations = {
         asyncRouter.addRouter();
     },
     SET_AUTH_BUTTON_LIST(state,obj){
-        state.menuList=obj;
+        state.authButtonList=obj;
         storage.saveAuthButtonList(obj);
     },
 

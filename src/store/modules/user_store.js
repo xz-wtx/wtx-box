@@ -12,7 +12,7 @@ const mutations = {
         storage.saveToken(token);
     },
     SET_USER(state,user){
-        state.token = user;
+        state.user = user;
         storage.saveUser(user)
     }
 }
