@@ -8,6 +8,7 @@
 export default {
   name: "init",
   props:{
+    //默认清空（菜单点击，tab删除时清空）,false菜单点击，tab删除时都不清空
     defaultClear:{
       type:Boolean,
       default:true
