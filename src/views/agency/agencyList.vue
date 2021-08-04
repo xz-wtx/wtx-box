@@ -1,7 +1,7 @@
 <template>
   <!--中介管理-->
-  <div style="height: 100%;">
 
+  <init>
     <auth-table
         ref="search"
         :optionData.sync="option"
@@ -11,7 +11,9 @@
     <el-dialog title="中介信息" v-model="dialogFormVisible">
       <agency-edit ref="agency" @load="editAddLoad"></agency-edit>
     </el-dialog>
-  </div>
+  </init>
+
+
 </template>
 
 <script>

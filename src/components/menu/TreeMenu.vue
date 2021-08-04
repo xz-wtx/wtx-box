@@ -43,8 +43,8 @@ export default {
   methods:{
     selectMenu(obj){
       //添加标签
-      if(typeof window.addTab === "function"){
-        window.addTab(obj)
+      if(typeof window.newTab === "function"){
+        window.newTab(obj)
       }
       //添加面包碎屑
       if(typeof window.addBreadcrumb === "function"){

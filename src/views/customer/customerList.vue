@@ -1,8 +1,8 @@
 <template>
   <!--客户管理-->
-  <div>
+  <init>
     customerList
-  </div>
+  </init>
 </template>
 
 <script>

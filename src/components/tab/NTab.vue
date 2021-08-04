@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-tabs v-model="editableTabsValue" type="card"  @tab-remove="removeTab" @tab-click="tabClick">
+    <el-tabs v-model="editableTabsValue" type="card"  @tab-remove="delTab" @tab-click="tabClick">
       <el-tab-pane
           v-for="(item) in editableTabs"
           :key="item.name"
@@ -25,18 +25,19 @@ export default {
     }
   },
   mounted() {
-    window.addTab=this.addTab
+    window.newTab=this.newTab
+    window.delTab=this.delTab
   },
   methods: {
 
-    addTab(obj) {
+    newTab(obj) {
       for (let i = 0; i <this.editableTabs.length ; i++) {
         if(this.editableTabs[i].name===(obj.path)){
           this.editableTabsValue = obj.path;
           return;
         }
       }
-
+      alert(JSON.stringify(obj))
         this.editableTabs.push({
           title: obj.title,
           name: obj.path,
@@ -44,9 +45,10 @@ export default {
         });
       this.editableTabsValue = obj.path;
     },
-    removeTab(targetName) {
-      // //点击菜单重置子路由数据
+    delTab(targetName) {
+
       /**
+       * 删除tab时重置
        * bool(是否清空数据)
        * path（清空数据的路由）
        */

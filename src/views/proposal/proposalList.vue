@@ -1,8 +1,8 @@
 <template>
   <!--意向书管理-->
-  <div>
+  <init>
     proposalList
-  </div>
+  </init>
 </template>
 
 <script>

@@ -1,10 +1,10 @@
 <template>
   <!--账单管理-->
-<div>
+<init>
   billList
   <input v-model="vv">
 
-</div>
+</init>
 </template>
 
 <script>

@@ -12,8 +12,14 @@ import './assets/icons/index';
 import mixins from './mixins/index';
 
 
+window.addEventListener('beforeunload', closeMask())
 
+function closeMask() {
  asyncRouter.addRouter();
+}
+
+
+
 
 let  app=createApp(App);
 app.use(ElementPlus, { locale });

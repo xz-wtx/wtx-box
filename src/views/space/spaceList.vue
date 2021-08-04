@@ -1,8 +1,8 @@
 <template>
 <!--空间管理-->
-  <div>
+  <init :default-clear="false">
     spaceList
-  </div>
+  </init>
 </template>
 
 <script>

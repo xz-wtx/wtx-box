@@ -1,9 +1,9 @@
 <template>
   <!--合同管理-->
-  <div style="height: 100%">
+  <init >
     contractList
     <input v-model="f">
-  </div>
+  </init>
 </template>
 
 <script>

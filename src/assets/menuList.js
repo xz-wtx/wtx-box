@@ -1,7 +1,19 @@
 let menuDataList=[
     {
+        title:"个人信息",
+        name:"personal_details",
+        component:'sys/personal/personal_details',
+        path:"/index/personal",
+        type:2,
+        icon:'client',
+        closable:true,
+        meta:{
+            keepAlive:true
+        },
+    },
+    {
         title:"数据汇总",
-        name:"2eee",
+        name:"dashboard",
         component:'sys/dashboard/Dashboard',
         path:"/index/dashboard",
         type:0,

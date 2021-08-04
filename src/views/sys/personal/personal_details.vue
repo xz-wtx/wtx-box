@@ -1,9 +1,10 @@
 <template>
-  <div >
+  <init>
     个人信息
     <input v-model="userName">
-    <init :default-clear="false" @clearData="clearData"></init>
-  </div>
+    <el-button @click="removeTab">关闭</el-button>
+    222
+  </init>
 </template>
 
 <script>
@@ -20,6 +21,9 @@ export default {
   methods:{
     clearData(){
       console.log("111")
+    },
+    removeTab(){
+      window.removeTab("个人信息")
     }
   }
 }

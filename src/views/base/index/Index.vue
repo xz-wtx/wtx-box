@@ -32,11 +32,11 @@
            <setting></setting>
           </div>
           <el-divider style="margin:5px 0;"></el-divider>
-        <!-- <n-tab></n-tab>-->
+         <n-tab></n-tab>
         </el-header>
         <el-main>
 
-
+          {{!$route.meta.keepAlive}}
            <div class="content_div" >
              <div class="content_div" >
                <router-view v-slot="{ Component  }"  v-if="isRouterAlive" >
@@ -84,9 +84,9 @@ export default {
   mounted() {
     //需要把菜单一级显示
     this.getAllMenuList(this.$router.options.routes)
-    let _this=this;
-    window.findMenuByTitle=_this.findMenuByTitle;
-    _this.findMenuByTitle("数据汇总");
+    window.removeTab=this.removeTab;
+    window.addTab=this.addTab;
+    this.addTab("数据汇总");
   },
 
   methods:{
@@ -134,6 +134,15 @@ export default {
         }
       }
     },
+
+    removeTab(title){
+
+      for (let i = 0; i < this.menuList.length; i++) {
+        if(this.menuList[i].title===title){
+          window.delTab(this.menuList[i].path)
+        }
+      }
+    },
     //根据标题查询路由
     /**
      *
@@ -141,11 +150,11 @@ export default {
      * @param param 参数
      * @param bool 是否跳转
      */
-    findMenuByTitle(title,param={},bool=true){
+    addTab(title,param={},bool=true){
       for (let i = 0; i < this.menuList.length; i++) {
         if(this.menuList[i].title===title){
-          if(typeof window.addTab === "function"){
-            window.addTab(this.menuList[i])
+          if(typeof window.newTab === "function"){
+            window.newTab(this.menuList[i])
           }
           if(typeof window.addBreadcrumb === "function"){
             window.addBreadcrumb(this.menuList[i])

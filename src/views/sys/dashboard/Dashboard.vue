@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <init>
     仪表盘
-  </div>
+  </init>
 </template>
 
 <script>

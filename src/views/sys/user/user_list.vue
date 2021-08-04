@@ -1,6 +1,5 @@
 <template>
-  <div style="height: 100%;">
-{{option}}
+  <init :default-clear="false">
     <auth-table
         ref="search"
         :optionData.sync="option"
@@ -11,10 +10,7 @@
         </el-dialog>
       </template>
     </auth-table>
-
-
-
-  </div>
+  </init>
 </template>
 
 <script>

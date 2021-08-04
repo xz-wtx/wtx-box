@@ -1,8 +1,9 @@
 <template>
   <!--市场汇报-->
-  <div>
-    bazaar
-  </div>
+  <init>
+    dddd
+  </init>
+
 </template>
 
 <script>

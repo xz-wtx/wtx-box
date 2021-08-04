@@ -21,7 +21,13 @@ export default {
   name: "setting",
   methods: {
     handleCommand(command) {
-      window.findMenuByTitle("个人信息")
+      if (command==='a'){
+        window.addTab("个人信息")
+      }
+      if(command==='b'){
+        location.href="/"
+      }
+
     }
   }
 }
