@@ -1,6 +1,6 @@
 <template>
   <!--账单管理-->
-<init>
+<init :default-clear="false">
   billList
   <input v-model="vv">
 

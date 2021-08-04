@@ -24,7 +24,7 @@ let menuDataList=[
         },
     },
     {
-        title:"中介管理",
+        title:"用户管理",
         name:"agencyList",
         component:'agency/agencyList',
         path:"/index/agencyList",
@@ -36,53 +36,7 @@ let menuDataList=[
         },
     },
     {
-        title:"客户线索",
-        name:"khxs",
-        component:'common',
-        path:"khxs",
-        type:1,
-        icon:'clue',
-        children:[
-            {
-                title:"客户管理",
-                name:"customerList",
-                component:'customer/customerList',
-                path:"/customerList",
-                icon:'client',
-                closable:true,
-                type:2,
-                meta:{
-                    keepAlive:false
-                },
-                superList:[
-                    {
-                        title:'客户线索',
-                        path:''
-                    }
-                ]
-            },
-            {
-                title:"市场备注",
-                name:"bazaarList",
-                component:'bazaar/bazaarList',
-                path:"/bazaarList",
-                icon:'client',
-                type:2,
-                closable:true,
-                meta:{
-                    keepAlive:true
-                },
-                superList:[
-                    {
-                        title:'客户线索',
-                        path:''
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        title:"业主合同",
+        title:"业主",
         name:"",
         path:"yzht",
         type:1,
@@ -140,21 +94,8 @@ let menuDataList=[
             keepAlive:false
         },
     },
-
     {
-        title:"空间管理",
-        name:"spaceList",
-        component:'space/spaceList',
-        path:"/spaceList",
-        type:0,
-        icon:'client',
-        meta:{
-            keepAlive:false
-        },
-    },
-
-    {
-        title:"管理员",
+        title:"系统管理",
         name:"",
         component:'common',
         path:"gly",
