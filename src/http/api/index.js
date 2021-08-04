@@ -1,4 +1,4 @@
-import Login from "@/views/base/login/Login";
+import loginApi from './login/login_api'
 export  default {
-  Login
+  loginApi
 }

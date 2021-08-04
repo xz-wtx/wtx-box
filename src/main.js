@@ -8,6 +8,8 @@ import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import './assets/icons/index';
+//api
+import api from './http/api/index';
 //全局方法
 import mixins from './mixins/index';
 
@@ -22,6 +24,8 @@ function closeMask() {
 
 
 let  app=createApp(App);
+app.config.globalProperties.$api=api;
+
 app.use(ElementPlus, { locale });
 app.mixin(mixins)
 app.use(store).use(router).use(Load).mount("#app");

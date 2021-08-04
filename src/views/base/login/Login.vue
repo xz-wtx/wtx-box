@@ -106,8 +106,10 @@ export default {
     },
     handleLogin(){
       let _this=this;
+      this.$api.loginApi.login({}).then(res=>{
+        alert(1)
+      })
       setTimeout(function () {
-
         _this.$store.dispatch('setMenuList',menuList);
       },1000)
     }

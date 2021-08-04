@@ -28,11 +28,13 @@
               <i v-if="!isCollapse" class="el-icon-s-fold" @click="clickCollapse(true)"></i>
               <i v-if="isCollapse" class="el-icon-s-unfold" @click="clickCollapse(false)"></i>
             </div>
+            <!--面包屑导航-->
           <breadcrumb :menuList="menuList"></breadcrumb>
            <setting></setting>
           </div>
           <el-divider style="margin:5px 0;"></el-divider>
-         <n-tab></n-tab>
+          <!--tab标签-->
+          <!--<n-tab></n-tab>-->
         </el-header>
         <el-main>
 

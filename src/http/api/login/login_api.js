@@ -5,7 +5,8 @@ import {get, post, postAES} from '../../http'
  */
 export const login=p=>post("x/login",p,true);
 
-/**
- *获取菜单
- */
-export const getMenu=p=>post("x/getMenu",p,true);
+
+
+export default  {
+    login
+}
