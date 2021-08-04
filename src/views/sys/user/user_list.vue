@@ -172,7 +172,7 @@ export default {
         this.$refs.agency.editRow(JSON.parse(JSON.stringify(row)));
       })
     },
-    //删除
+    //删除 
     delRow(row){
       alert("删除")
     },
