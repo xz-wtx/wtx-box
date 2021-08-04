@@ -135,12 +135,7 @@
                 //操作栏宽度
                 authButWidth:120,
                 //按钮
-                authBut:{ type:Array, default:()=>[
-                    // {func:Object, 方法名
-                    // name:"",  名称
-                    // auth:"",//权限
-                    // icon:''},
-                  ]
+                authBut:{ type:Array, default:()=>[]
                 },
                 //开启多选框
                 openCheckbox:{type: Boolean, default:()=>false },

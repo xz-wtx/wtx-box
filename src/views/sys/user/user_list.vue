@@ -28,7 +28,7 @@ export default {
         searchList: {
           list:
               {
-                shopNo:{placeholder:'请输入店铺编号',type:"input",title:'店铺编号',value:''},
+                shopNo:{placeholder:'请输入店铺编号',type:"input",title:'店铺编号',value:'',valueFun:this.realTimeShopNo,linkName:'shopName'},
                 shopName:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''}
               },//查询（返回结果例：{shopNo:'1',shopName:'2'}）
 
@@ -149,7 +149,6 @@ export default {
 
     //查询（查询条件直接带入{key:1,key:2}）
     load(data) {
-      alert(JSON.stringify(data))
       this.option.data = [{type:1},{type:2}];
       // this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
       //   if (res.data.status == 200) {
@@ -180,6 +179,17 @@ export default {
     //行字段点击
     userName(row,but){
       alert("行字段点击")
+    },
+
+    /**
+     * 实时通知
+     * @param value 值
+     * @param obj 当前对象
+     * @param linkName 链接对象
+     */
+    realTimeShopNo(value,obj,linkName){
+      alert(value)
+      linkName.value=234
     }
   }
 }

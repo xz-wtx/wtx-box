@@ -158,22 +158,13 @@
             let linkObjList={};
             if(obj.valueFun!==undefined&&obj.valueFun!==''&&obj.valueFun!==null){
               if(typeof obj.valueFun==="function"){
-                if(obj.linkList!==undefined){
+                let linkObj=obj.linkName;
+                if(linkObj!==undefined){
                   let list=this.searchList.list;
-                  for (let i of list) {
-                    for (let k in i) {
-                      obj.linkList.forEach(function (data){
-                        if(data===k){
-                          i[k].value='';
-                          i[k].selectData=[];
-                          linkObjList[k]=i[k];
-                        }
-                      })
-
-                    }
-                  }
+                  obj.valueFun(value,obj,list[linkObj]);
+                  return
                 }
-                obj.valueFun(value,obj,linkObjList);
+                  obj.valueFun(value,obj);
               }
             }
           }
