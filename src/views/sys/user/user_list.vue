@@ -32,7 +32,14 @@ export default {
                 shopName:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''}
               },
 
-          func:[{title:"添加",funName:this.add,auth:"",icon:''}],
+          func:[
+              {
+                title:"添加",//按钮名称
+                funName:this.add,//事件
+                auth:"",//按钮权限（可写可不写）
+                icon:'',//图片（可写可不写）
+              }
+              ],
           //按钮布局是否跟在查询款后面
           butNewlineLayout:false,
         },
@@ -125,9 +132,13 @@ export default {
         authButWidth:120,
         //操作
         authBut:[
-          {name:"修改",func:this.editRow,authType:[3],field:"type",value:[1]},//权限
+          {name:"修改",//行操作名称
+            func:this.editRow,//事件
+            authType:[3],//权限(查看components/comp/auth.vue)可修改扩展
+            field:"type",
+            value:[1]
+          },
           {name:"删除",func:this.delRow},
-         // {name:"修改",func:this.editRow,authType:[2,3],field:"status",value:[3],account:"userAccount"},
         ],
         //列表数据
         data: [],
@@ -151,10 +162,12 @@ export default {
     },
     //新增
     add(){
+      alert("新增")
       this.option.show_1=true;
     },
     //修改
     editRow(row){
+      alert("修改")
       this.option.show_1=true;
       this.$nextTick(() => {
         this.$refs.agency.editRow(JSON.parse(JSON.stringify(row)));
@@ -162,11 +175,11 @@ export default {
     },
     //删除
     delRow(row){
-
+      alert("删除")
     },
     //行字段点击
     userName(row,but){
-
+      alert("行字段点击")
     }
   }
 }
