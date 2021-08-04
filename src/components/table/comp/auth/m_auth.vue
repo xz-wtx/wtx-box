@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <div  v-for="(but,index) in optionData.authBut"
-          :key="index" style="margin-left: 10px">
-      <el-button v-if="auth(but,scope)"
-                 @click="click(but,scope.row,but)"
-                 type="text"
-                 :icon="but.icon"
-                 size="small">
-        {{but.name}}
-      </el-button>
+  <div style="display: flex">
+    <div v-for="(but,index) in optionData.authBut"
+         :key="index">
+      <div  v-if="auth(but,scope)">
+        <el-button
+                   class="but_class_1"
+                   @click="click(but,scope.row,but)"
+                   type="text"
+                   :icon="but.icon"
+                   size="small">
+          {{but.name}}
+        </el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -87,4 +90,7 @@ export default {
 
 <style scoped>
 
+.but_class_1{
+  margin-left: 6px;
+}
 </style>

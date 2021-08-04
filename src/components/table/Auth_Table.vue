@@ -75,7 +75,7 @@
                     :min-width="optionData.authButWidth===undefined?'200':optionData.authButWidth"
                     >
                 <template #default="scope" style="text-align: center">
-                  <m_auth :scope="scope" :option-data="optionData"></m_auth>
+                  <m_auth :scope="scope" @handle="handle" :option-data="optionData"></m_auth>
                 </template>
 
             </el-table-column>
@@ -236,6 +236,7 @@
 
             //行操作自定义事件
             handle(data, row,but) {
+              alert("2131")
               if(data.func!==undefined) {
                 if (typeof data.func === "function") {
                   data.func(row, but)

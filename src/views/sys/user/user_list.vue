@@ -6,7 +6,7 @@
         @loadData="load">
       <template #view>
         <el-dialog title="用户信息" v-model="option.show_1">
-          <User_edit @load="$refs.search.queryData_1()"></User_edit>
+          <User_edit ref="user" @load="$refs.search.queryData_1()"></User_edit>
         </el-dialog>
       </template>
     </auth-table>
@@ -129,7 +129,7 @@ export default {
           },
         ],
         //操作栏宽度
-        authButWidth:120,
+        authButWidth:160,
         //操作
         authBut:[
           {name:"修改",//行操作名称
@@ -169,10 +169,10 @@ export default {
       alert("修改")
       this.option.show_1=true;
       this.$nextTick(() => {
-        this.$refs.agency.editRow(JSON.parse(JSON.stringify(row)));
+        this.$refs.user.editRow(JSON.parse(JSON.stringify(row)));
       })
     },
-    //删除 
+    //删除
     delRow(row){
       alert("删除")
     },

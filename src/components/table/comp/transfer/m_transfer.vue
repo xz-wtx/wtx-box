@@ -8,7 +8,7 @@
         :with-header="false">
       <div style="margin-top: 50px;margin-left: 10%">
         <el-transfer
-            :titles="['隐藏列', '显示列']"
+            :titles="['显示列', '隐藏列']"
             v-model="hideTitle"
             :props="{
                      key: 'prop',
