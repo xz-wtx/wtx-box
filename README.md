@@ -10,14 +10,14 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 测试打包
 ```
-npm run build
+npm run uat
 ```
 
-### Lints and fixes files
+### 正式打包
 ```
-npm run lint
+npm run prod
 ```
 
 ### Customize configuration
