@@ -38,7 +38,6 @@
         </el-header>
         <el-main>
 
-          {{!$route.meta.keepAlive}}
            <div class="content_div" >
              <div class="content_div" >
                <router-view v-slot="{ Component  }"  v-if="isRouterAlive" >
