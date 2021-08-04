@@ -105,7 +105,7 @@
 
 <script>
 
-    import CM_search from "../search/CM_search";
+    import CM_search from "./search/CM_search";
     import m_input from "@/components/table/comp/input/m_input";
     import m_select from "@/components/table/comp/select/m_select";
     import m_autocomplete from "@/components/table/comp/autocomplete/m_autocomplete";
