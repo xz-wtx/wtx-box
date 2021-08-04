@@ -1,19 +1,16 @@
 <template>
     <div  class="auth_table">
         <CM_search :search-list="optionData.searchList" v-if="optionData.searchList!==undefined"></CM_search>
-      <!--缩进10px-->
-      <div style="padding-left: 10px">
-        <slot name="slot_1" ></slot>
-      </div>
-      <!--不缩进-->
-        <slot name="slot_2"></slot>
+
+        <!--占位-->
+        <slot class="slot_div" name="slot"></slot>
 
         <!--显示隐藏类型-->
       <m_transfer :option-data="optionData"  ref="transfer"></m_transfer>
 
         <!--  常用一般table-->
         <el-table
-
+                v-if="optionData.table.length>0"
                 :height="optionData.height"
                 ref="multipleTable"
                 :data="optionData.data"
