@@ -30,7 +30,7 @@ export default {
               {
                 shopNo:{placeholder:'请输入店铺编号',type:"input",title:'店铺编号',value:''},
                 shopName:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''}
-              },
+              },//查询（返回结果例：{shopNo:'1',shopName:'2'}）
 
           func:[
               {
@@ -147,7 +147,7 @@ export default {
   },
   methods: {
 
-    //查询
+    //查询（查询条件直接带入{key:1,key:2}）
     load(data) {
       alert(JSON.stringify(data))
       this.option.data = [{type:1},{type:2}];
