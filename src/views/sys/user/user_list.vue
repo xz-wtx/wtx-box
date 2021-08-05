@@ -36,7 +36,7 @@ export default {
                       value:'',//值
                       valueFun:this.realTimeShopNo,//值实时变化通知（可写可不写）
                       linkName:'shopName',//连接下一个字段（可写可不写）
-                      //selectData: [{label:1,value:1}] //type=select时才有
+                      //option:{ data: [],value:"shopNo", label:'shopName'},] //type=select时才有
                     },
                 shopName:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''}
               },//查询（返回结果例：{shopNo:'1',shopName:'2'}）

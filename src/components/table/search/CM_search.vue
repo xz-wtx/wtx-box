@@ -42,6 +42,18 @@
                                 :placeholder="obj.placeholder"
                                 :clearable="obj.clearable===undefined?true:obj.clearable">
                         </el-date-picker>
+                          <el-date-picker
+                              @change="realTime($event,obj)"
+                              v-if="obj.type==='datetime'"
+                              :disabled="obj.disabled"
+                              class="width_1"
+                              size="mini"
+                              v-model="obj.value"
+                              value-format="YYYY-MM-DD HH:mm:ss"
+                              type="datetime"
+                              :placeholder="obj.placeholder"
+                              :clearable="obj.clearable===undefined?true:obj.clearable">
+                            </el-date-picker>
 
                           <el-select
                                     :disabled="obj.disabled"
@@ -53,12 +65,12 @@
                                     :clearable="obj.clearable===undefined?true:obj.clearable"
                                     placeholder="请选择"
                                     v-if="obj.type==='select'">
-                            <el-option
-                                    v-for="item in obj.selectData"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
+                             <el-option
+                                 v-for="item in obj.option.data"
+                                 :key="item[obj.option.value]"
+                                 :label="item[obj.option.label]"
+                                 :value="item[obj.option.value]">
+                                </el-option>
                         </el-select>
 
                       <el-autocomplete
