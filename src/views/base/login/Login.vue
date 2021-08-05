@@ -105,7 +105,7 @@ export default {
     },
     handleLogin(){
       let _this=this;
-      this.$api.loginApi.login({}).then(res=>{
+      this.$api.loginApi.login({username:this.username,password:this.password}).then(res=>{
         if(res.data.status===200){
           _this.$store.dispatch("setUser",res.data.data.user)
           _this.$store.dispatch("setToken",res.data.data.token)
