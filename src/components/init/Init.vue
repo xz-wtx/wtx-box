@@ -25,6 +25,7 @@ export default {
   methods:{
 
     rClearData(){
+
       let obj=this.$store.getters.getClearData;//获取当前路由数据是否清空（tab点击不清空，菜单点击清空）
       let newRouter= this.$parent.$route.path;
       console.log(obj,newRouter)
@@ -33,7 +34,7 @@ export default {
         this.$emit("clearData")//清空调用事件
         if(this.defaultClear){
           if(typeof this.$parent.$options.data === "function"){
-            Object.assign(this.$parent.$data, this.$parent.$options.data())
+            Object.assign(this.$parent.$data, this.$parent.$options.data.call(this.$parent));
           }
         }
         /**

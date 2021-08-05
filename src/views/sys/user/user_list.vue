@@ -5,8 +5,8 @@
         :optionData.sync="option"
         @loadData="load">
       <template #view>
-        <el-dialog title="用户信息" v-model="option.show_1">
-          <User_edit ref="user" @load="$refs.search.queryData_1()"></User_edit>
+        <el-dialog title="用户信息" v-model="option.showDialog">
+          <User_edit ref="user" @load="$refs.search.queryData()"></User_edit>
         </el-dialog>
       </template>
     </auth-table>
@@ -22,8 +22,8 @@ export default {
     return{
 
       option: {
-        //弹窗关闭（show_1，show_2。。。）
-        show_1:false,
+        //弹窗关闭（showDialog，名称自定义，可以多个）
+        showDialog:false,
         //搜索
         searchList: {
           list:
@@ -171,12 +171,12 @@ export default {
     //新增
     add(){
       alert("新增")
-      this.option.show_1=true;
+      this.option.showDialog=true;
     },
     //修改
     editRow(row){
       alert("修改")
-      this.option.show_1=true;
+      this.option.showDialog=true;
       this.$nextTick(() => {
         this.$refs.user.editRow(JSON.parse(JSON.stringify(row)));
       })

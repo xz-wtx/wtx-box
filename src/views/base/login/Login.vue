@@ -107,11 +107,19 @@ export default {
     handleLogin(){
       let _this=this;
       this.$api.loginApi.login({}).then(res=>{
-        alert(1)
+        if(res.data.status===200){
+          _this.$store.dispatch("setUser",res.data.data.user)
+          _this.$store.dispatch("setToken",res.data.data.token)
+          _this.$store.dispatch("setAuthButtonList",res.data.data.authButton)
+          setTimeout(function () {
+            _this.$store.dispatch('setMenuList',res.data.data.menuList);
+          },100)
+        }else{
+          this.$message.error(res.data.message);
+        }
+
       })
-      setTimeout(function () {
-        _this.$store.dispatch('setMenuList',menuList);
-      },1000)
+
     }
   }
 }

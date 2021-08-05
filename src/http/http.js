@@ -12,7 +12,7 @@ import store from '../store'
 let HOST = process.env.NODE_ENV;
 
 
-axios.defaults.baseURL = 'http://localhost:8003';
+axios.defaults.baseURL = 'http://localhost:8080';
 if (HOST === 'uat') {
   axios.defaults.baseURL =  'http://localhost:8003';
 } else if (HOST === 'prod') {
@@ -26,6 +26,7 @@ axios.defaults.timeout = 40000;
 axios.interceptors.request.use(
     config => {
       config.headers['Content-Type'] = 'application/json'
+      console.log(JSON.stringify(store.getters.getToken))
       config.headers.Authorization = store.getters.getToken
       return config;
     },

@@ -115,10 +115,6 @@
             optionData:{
                 //搜索和事件
                 searchList:{type: Array,default:()=>{} },
-                //弹窗关闭
-                show_1:{ type:Boolean, default :()=>false },
-                //弹窗关闭
-                show_2:{ type:Boolean,default :()=>false},
                 //是否显示隐藏字段按钮
                 openFieldHide:{type:Boolean,default :()=>false},
                 //查询，搜索按钮布局
@@ -168,29 +164,6 @@
                 const  assign= Object.assign(page,this.getSearchValue());
                 this.$emit("load-data",assign);
             },
-          /**
-           *条件查询数据
-           **/
-          queryData_all(){
-            this.newOptionData.show_1=false;
-            this.newOptionData.show_2=false;
-            this.queryData();
-          },
-            /**
-             *条件查询数据
-             **/
-            queryData_1(){
-              this.newOptionData.show_1=false;
-              this.queryData();
-            },
-            /**
-             *条件查询数据
-             **/
-            queryData_2(){
-              this.newOptionData.show_2=false;
-              this.queryData();
-            },
-
             /**
              * 清空条件数据
              **/

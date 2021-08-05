@@ -1,17 +1,18 @@
 <template>
   <!--中介管理-->
-
-  <init>
+  <init >
     <auth-table
         ref="search"
         :optionData.sync="option"
         @loadData="load">
+      <template #view>
+        <el-dialog title="中介信息" v-model="option.showDialog">
+          <agency-edit ref="agency" @load="$refs.search.queryData()"></agency-edit>
+        </el-dialog>
+      </template>
     </auth-table>
-
-    <el-dialog title="中介信息" v-model="dialogFormVisible">
-      <agency-edit ref="agency" @load="editAddLoad"></agency-edit>
-    </el-dialog>
   </init>
+
 
 
 </template>
@@ -25,6 +26,7 @@ export default {
     return{
       dialogFormVisible:false,
       option: {
+        showDialog:false,
         //搜索
         searchList: {
           list:
@@ -33,7 +35,9 @@ export default {
                 shopName:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''}
               },
 
-          func:[{title:"添加",funName:this.addAgency,auth:"",icon:''}],
+          func:[
+              {title:"添加",funName:this.addAgency,auth:"",icon:''}
+              ],
           butNewlineLayout:false,
         },
         //是否首次加
@@ -117,30 +121,22 @@ export default {
             prop:'createTime',
             label:'创建时间',
             render(row){
-              console.log(row)
               let date=new Date(row.createTime);
               return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
             }
           },
         ],
         // authButWidth:120,
-        // authBut:[
-        //   {name:"修改",func:this.editRow},
-        //   {name:"删除",func:this.delRow},
-        // ],
+        authBut:[
+          {name:"修改",func:this.editRow},
+          {name:"删除",func:this.delRow},
+        ],
         //列表数据
         data: [],
       },
     }
   },
   methods: {
-    //editAddLoad 修改添加刷新
-    editAddLoad() {
-      this.dialogFormVisible=false;
-      this.option.data = [];
-      //重新查询数据
-      this.$refs.search.queryData();
-    },
     //查询
     load(data) {
       this.option.data = [];
@@ -155,11 +151,11 @@ export default {
     },
     //新增
     addAgency(){
-      this.dialogFormVisible=true;
+      this.option.showDialog=true;
     },
     //修改
     editRow(row){
-      this.dialogFormVisible=true;
+      this.option.showDialog=true;
       this.$nextTick(() => {
         this.$refs.agency.editRow(JSON.parse(JSON.stringify(row)));
       })
