@@ -1,10 +1,10 @@
 <template>
   <el-select  size="mini" v-if="item.type==='select'"  v-model="m_prop[item.prop]" :placeholder="item.placeholder">
     <el-option
-        v-for="item in item.options===undefined?queryOptions(item,item.url):item.options "
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
+        v-for="obj in item.options===undefined?queryOptions(item,item.url):item.options "
+        :key="obj.value"
+        :label="obj.label"
+        :value="obj.value">
     </el-option>
   </el-select>
 </template>

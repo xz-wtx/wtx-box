@@ -66,10 +66,10 @@
                                     placeholder="请选择"
                                     v-if="obj.type==='select'">
                              <el-option
-                                 v-for="item in obj.option.data"
-                                 :key="item[obj.option.value]"
-                                 :label="item[obj.option.label]"
-                                 :value="item[obj.option.value]">
+                                 v-for="item in obj.options.data"
+                                 :key="item[obj.options.value]"
+                                 :label="item[obj.options.label]"
+                                 :value="item[obj.options.value]">
                                 </el-option>
                         </el-select>
 
