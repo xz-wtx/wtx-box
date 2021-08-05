@@ -48,7 +48,6 @@
 </template>
 
 <script>
-import menuList from "@/assets/menuList";
 import storage from "@/store/storage/storage";
 
 export default {
