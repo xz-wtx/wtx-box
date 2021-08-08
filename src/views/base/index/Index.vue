@@ -36,10 +36,9 @@
           <!--tab标签-->
           <!--<n-tab></n-tab>-->
         </el-header>
-        <el-main>
+        <el-main style="height:0;flex-grow:1;width: 100%">
 
            <div class="content_div" >
-             <div class="content_div" >
                <router-view v-slot="{ Component  }"  v-if="isRouterAlive" >
                  <keep-alive>
                    <component :is="Component"   v-show="$route.meta.keepAlive"/>
@@ -48,7 +47,6 @@
 
                <router-view v-if="isRouterAlive&&!$route.meta.keepAlive" ></router-view>
              </div>
-           </div>
 
 
         </el-main>
@@ -212,6 +210,8 @@ export default {
   -webkit-transition: width .3s; /* Safari 和 Chrome */
   -o-transition: width .3s; /* Opera */
 }
-
+.el-container .is-vertical{
+  width: 0;
+}
 
 </style>
