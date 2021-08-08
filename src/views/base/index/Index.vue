@@ -86,6 +86,7 @@ export default {
     window.removeTab=this.removeTab;
     window.addTab=this.addTab;
     this.addTab("数据汇总");
+    //this.addTab(this.$route.path);
   },
 
   methods:{
@@ -145,13 +146,13 @@ export default {
     //根据标题查询路由
     /**
      *
-     * @param title 标题
+     * @param obj 标题/路径
      * @param param 参数
      * @param bool 是否跳转
      */
-    addTab(title,param={},bool=true){
+    addTab(obj,param={},bool=true){
       for (let i = 0; i < this.menuList.length; i++) {
-        if(this.menuList[i].title===title){
+        if(this.menuList[i].title===obj||this.menuList[i].path===obj){
           if(typeof window.newTab === "function"){
             window.newTab(this.menuList[i])
           }
