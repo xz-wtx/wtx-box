@@ -165,7 +165,6 @@ export default {
           }
 
           if(bool){
-            alert(this.menuList[i].path)
             this.$router.push(
                 {path:this.menuList[i].path,query:param}
             )

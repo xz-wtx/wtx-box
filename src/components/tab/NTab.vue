@@ -37,7 +37,6 @@ export default {
           return;
         }
       }
-      alert(JSON.stringify(obj))
         this.editableTabs.push({
           title: obj.title,
           name: obj.path,

@@ -1,4 +1,4 @@
-import {get, post, postAES} from '../../http'
+import {get} from '../../http'
 
 /**
  *登录
