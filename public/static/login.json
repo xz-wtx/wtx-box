@@ -137,7 +137,7 @@
                         "component": "admin/adminLog",
                         "path": "/adminLog",
                         "icon": "client",
-                        "type": 2,
+                        "type": 0,
                         "meta": {
                             "keepAlive": true
                         },

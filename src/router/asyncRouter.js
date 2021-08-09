@@ -49,6 +49,7 @@ function filterRouter(routers,files) { // 遍历后台传来的路由字符串�
             component:comment,
             title:route.title,
             closable:route.closable,
+            type:route.type,
             meta:route.meta
         }
 

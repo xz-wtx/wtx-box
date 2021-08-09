@@ -85,8 +85,8 @@ export default {
     this.getAllMenuList(this.$router.options.routes)
     window.removeTab=this.removeTab;
     window.addTab=this.addTab;
-    this.addTab("数据汇总");
-    //this.addTab(this.$route.path);
+    //this.addTab("数据汇总");
+    this.addTab(this.$route.path);
   },
 
   methods:{
@@ -153,6 +153,7 @@ export default {
     addTab(obj,param={},bool=true){
       for (let i = 0; i < this.menuList.length; i++) {
         if(this.menuList[i].title===obj||this.menuList[i].path===obj){
+
           if(typeof window.newTab === "function"){
             window.newTab(this.menuList[i])
           }
@@ -164,6 +165,7 @@ export default {
           }
 
           if(bool){
+            alert(this.menuList[i].path)
             this.$router.push(
                 {path:this.menuList[i].path,query:param}
             )

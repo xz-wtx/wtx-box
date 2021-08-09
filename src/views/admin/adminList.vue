@@ -1,10 +1,10 @@
 <template>
   <!--管理员-->
-<div>
+<init>
   adminList
   <input v-model="tiel">
-  <init></init>
-</div>
+  <el-button @click="test">111</el-button>
+</init>
 </template>
 
 <script>
@@ -13,6 +13,11 @@ export default {
   data(){
     return{
       tiel:''
+    }
+  },
+  methods:{
+    test(){
+      window.addTab("管理员日志")
     }
   }
 }

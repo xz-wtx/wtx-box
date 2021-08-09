@@ -1,13 +1,17 @@
 <template>
   <!--管理员日志-->
-<div>
-  adminLog
-</div>
+  <init :default-clear="false">
+    adminLog
+  </init>
 </template>
 
 <script>
 export default {
-  name: "adminLog"
+  name: "adminLog",
+  methods: {
+
+  }
+
 }
 </script>
 

@@ -7,15 +7,17 @@
           <svg-icon :iconClass="data.icon" class-name="" style="margin-right: 10px" v-if="data.icon!==undefined"/>
           <span v-show="!menuCollapse">{{ data.title }} </span>
         </template>
-        <el-menu-item  @click="selectMenu(child)" :index="child.path" v-for="(child,index) in data.children" :key="index">
-          <template #title >
-            <svg-icon :iconClass="child.icon" class-name="" style="margin-right: 10px" v-if="child.icon!==undefined"/>
-            <span>{{ child.title }}</span>
-          </template>
-        </el-menu-item>
+        <div v-for="(child,index) in data.children" :key="index">
+          <el-menu-item  @click="selectMenu(child)"  :index="child.path"  v-if="child.type===2">
+            <template #title >
+              <svg-icon :iconClass="child.icon" class-name="" style="margin-right: 10px" v-if="child.icon!==undefined"/>
+              <span>{{ child.title }}</span>
+            </template>
+          </el-menu-item>
+        </div>
       </el-submenu>
 
-      <el-menu-item :index="data.path" v-if="data.type===0" @click="selectMenu(data)" >
+      <el-menu-item  :index="data.path" v-if="data.type===0" @click="selectMenu(data)" >
 
         <svg-icon :iconClass="data.icon" class-name="" style="margin-right: 10px" v-if="data.icon!==undefined"/>
         <template #title >{{ data.title }}</template>
