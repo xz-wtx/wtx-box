@@ -6,10 +6,10 @@ import {axiosBase,successTitle,errorTitle,openToast,clearToast} from './api/requ
 
 /**
  * get请求
- * @param url
- * @param body
- * @param isToast
- * @param LoadingTitle
+ * @param url 路径 路径
+ * @param body 参数
+ * @param isToast 开启Toast
+ * @param LoadingTitle load提示
  * @returns {Promise<unknown>}
  */
 export function get(url,body,isToast=true,LoadingTitle="加载中...") {
@@ -24,10 +24,10 @@ export function get(url,body,isToast=true,LoadingTitle="加载中...") {
 
 /**
  * post请求
- * @param url
- * @param body
- * @param isToast
- * @param LoadingTitle
+ * @param url 路径
+ * @param body 参数
+ * @param isToast 开启Toast
+ * @param LoadingTitle load提示
  * @returns {Promise<unknown>}
  */
 export function post(url,body,isToast=true,LoadingTitle="加载中...") {
@@ -41,10 +41,10 @@ export function post(url,body,isToast=true,LoadingTitle="加载中...") {
 }
 /**
  * postJson请求
- * @param url
- * @param body
- * @param isToast
- * @param LoadingTitle
+ * @param url 路径
+ * @param body 参数
+ * @param isToast 开启Toast
+ * @param LoadingTitle load提示
  * @returns {Promise<unknown>}
  */
 export function postJson(url,body,isToast=true,LoadingTitle="加载中...") {
@@ -58,10 +58,10 @@ export function postJson(url,body,isToast=true,LoadingTitle="加载中...") {
 }
 /**
  * postJson请求
- * @param url
- * @param body
- * @param isToast
- * @param LoadingTitle
+ * @param url 路径
+ * @param body 参数
+ * @param isToast 开启Toast
+ * @param LoadingTitle load提示
  * @returns {Promise<unknown>}
  */
 export function postJsonAES(url,body,isToast=true,LoadingTitle="加载中...") {
@@ -75,10 +75,10 @@ export function postJsonAES(url,body,isToast=true,LoadingTitle="加载中...") {
 }
 /**
  * postFromData请求
- * @param url
- * @param body
- * @param isToast
- * @param LoadingTitle
+ * @param url 路径
+ * @param body 参数
+ * @param isToast 开启Toast
+ * @param LoadingTitle load提示
  * @returns {Promise<unknown>}
  */
 export function postFromData(url,body,isToast=true,LoadingTitle="加载中...") {
@@ -94,10 +94,10 @@ export function postFromData(url,body,isToast=true,LoadingTitle="加载中...") 
 
 /**
  * put请求
- * @param url
- * @param body
- * @param isToast
- * @param LoadingTitle
+ * @param url 路径
+ * @param body 参数
+ * @param isToast 开启Toast
+ * @param LoadingTitle load提示
  * @returns {Promise<unknown>}
  */
 export function put(url,body,isToast=true,LoadingTitle="删除中...") {
@@ -112,10 +112,10 @@ export function put(url,body,isToast=true,LoadingTitle="删除中...") {
 
 /**
  * del请求
- * @param url
- * @param body
- * @param isToast
- * @param LoadingTitle
+ * @param url 路径
+ * @param body 参数
+ * @param isToast 开启Toast
+ * @param LoadingTitle load提示
  * @returns {Promise<unknown>}
  */
 export function del(url,isToast=true,LoadingTitle="删除中...") {
@@ -130,11 +130,11 @@ export function del(url,isToast=true,LoadingTitle="删除中...") {
 
 /**
  * json导出文件
- * @param url
- * @param params
- * @param fileName
- * @param timeout
- * @param isToast
+ * @param url 路径
+ * @param params 参数
+ * @param fileName 文件名
+ * @param timeout 超时时间
+ * @param isToast 开启Toast
  * @returns {Promise<unknown>}
  */
 export function postJsonExportFile(url,params={},fileName,timeout=103200,isToast=true){
@@ -150,11 +150,11 @@ export function postJsonExportFile(url,params={},fileName,timeout=103200,isToast
 
 /**
  * post导出文件
- * @param url
- * @param params
- * @param fileName
- * @param timeout
- * @param isToast
+ * @param url 路径
+ * @param params 参数
+ * @param fileName 文件名
+ * @param timeout 超时时间
+ * @param isToast 开启Toast
  * @returns {Promise<unknown>}
  */
 export function postExportFile(url,params={},fileName,timeout=103200,isToast=true){
@@ -170,14 +170,14 @@ export function postExportFile(url,params={},fileName,timeout=103200,isToast=tru
 
 /**
  * 文件导出
- * @param url
- * @param method
- * @param params
- * @param fileName
- * @param headers
- * @param timeout
- * @param isToast
- * @param LoadingTitle
+ * @param url 路径
+ * @param method 方法 方法
+ * @param params 参数
+ * @param fileName 文件名
+ * @param headers 请求头
+ * @param timeout 超时时间
+ * @param isToast 开启Toast
+ * @param LoadingTitle load提示
  * @returns {Promise<unknown>}
  */
 function exportFile(url,method, params={},fileName,headers,timeout=103200,isToast=true,LoadingTitle="导出中") {
@@ -240,12 +240,12 @@ function exportFile(url,method, params={},fileName,headers,timeout=103200,isToas
 
 /**
  * 请求
- * @param url
- * @param method
- * @param body
- * @param headers
- * @param LoadingTitle
- * @param isToast
+ * @param url 路径
+ * @param method   方法
+ * @param body 参数
+ * @param headers 请求头
+ * @param LoadingTitle load提示
+ * @param isToast 开启Toast
  * @returns {Promise<unknown>}
  */
 function request(url,method,body={},headers={},LoadingTitle="加载中...",isToast=true){
