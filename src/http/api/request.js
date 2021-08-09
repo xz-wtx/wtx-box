@@ -12,9 +12,9 @@ let HOST = process.env.NODE_ENV;
 
 axios.defaults.baseURL = 'http://localhost:8080';
 if (HOST === 'uat') {
-  axios.defaults.baseURL =  'http://localhost:8003';
+  axios.defaults.baseURL =  'http://localhost:8080';
 } else if (HOST === 'prod') {
-  axios.defaults.baseURL = 'http://localhost:8003';
+  axios.defaults.baseURL = 'http://106.14.10.78/admin-web';
 }
 
 // 请求超时时间
