@@ -43,7 +43,7 @@
                         :min-width="item.width===undefined?'':item.width"
                         :formatter="item.formatter">
                     <template #default="scope">
-                      <el-tooltip class="item" effect="dark" :content="scope.row[item.prop]" placement="top-start" v-if="item.showOverflowTooltip" >
+                      <el-tooltip class="item" effect="dark" :content="scope.row[item.prop]" :show-after="100" placement="top-start" v-if="item.showOverflowTooltip" >
                         <span v-if="item.render" v-html="item.render(scope.row)" @click="handle(item,scope.row,scope.row[item.prop])"></span>
                         <span v-else @click="handle(item,scope.row,scope.row[item.prop])"> {{scope.row[item.prop]}} </span>
                       </el-tooltip>
