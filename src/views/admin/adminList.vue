@@ -3,7 +3,7 @@
 <init>
   adminList
   <input v-model="tiel">
-  <el-button @click="test">111</el-button>
+  <el-button @click="test">跳转日志页面</el-button>
 </init>
 </template>
 
