@@ -1,12 +1,13 @@
 <template>
     <div >
+
         <!--简单搜索-->
         <div class="List wrap">
 
             <div v-for="(obj,index) in searchList.list" :key="index" class="div1">
 
-                  <span style="flex: 1;align-self: center;font-size: 13px"> {{obj.title}}：</span>
-                    <span style="flex: 1">
+                  <span class="div1_title"> {{obj.title}}：</span>
+                    <span class="div1_content">
 
                         <el-input class="width_1" size="mini" v-if="obj.type==='input'"
                                   :placeholder="obj.placeholder"
@@ -89,23 +90,21 @@
                     </span>
                 </div>
 
-              <div style="text-align: inherit;align-self: center;" v-if="searchList.butNewlineLayout!==undefined&&!searchList.butNewlineLayout">
-                <el-button type="primary" icon="el-icon-search" size="mini" @click="queryData()">搜索</el-button>
-                <el-button type="danger" icon="el-icon-delete" size="mini"  @click="clearData()">清空</el-button>
+              <div class="div1_but_0" v-if="searchList.butNewlineLayout!==undefined&&!searchList.butNewlineLayout">
+                <el-button class="but1" type="primary" icon="el-icon-search" size="mini" @click="queryData()">搜索</el-button>
+                <el-button class="but2" type="danger" icon="el-icon-delete" size="mini"  @click="clearData()">清空</el-button>
                 <span v-for="(func,index) in searchList.func" :key="index" style="margin-left: 10px">
-                   <el-button v-if="func.auth===''||func.auth==null||$store.getters.getAuthButtonList.indexOf(func.auth)>-1"  type="primary" @click="funClick(func)" :icon="func.icon" size="mini">{{func.title}}</el-button>
+                   <el-button class="but3" v-if="func.auth===''||func.auth==null||$store.getters.getAuthButtonList.indexOf(func.auth)>-1"  type="primary" @click="funClick(func)" :icon="func.icon" size="mini">{{func.title}}</el-button>
                 </span>
               </div>
 
-            <div v-for="(index) in (Object.keys(searchList.list).length<3?2:0)" :key="index"></div>
-
         </div>
 
-        <div style="margin-left: 10px;margin-bottom: 10px;margin-top: 10px" v-if="searchList.butNewlineLayout===undefined||searchList.butNewlineLayout">
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="queryData()">搜索</el-button>
-            <el-button type="danger" icon="el-icon-delete" size="mini"  @click="clearData()">清空</el-button>
+        <div class="div1_but_1" v-if="searchList.butNewlineLayout===undefined||searchList.butNewlineLayout">
+            <el-button class="_ut1" type="primary" icon="el-icon-search" size="mini" @click="queryData()">搜索</el-button>
+            <el-button class="but2" type="danger" icon="el-icon-delete" size="mini"  @click="clearData()">清空</el-button>
             <span v-for="(func,index) in searchList.func" :key="index" style="margin-left: 10px">
-               <el-button v-if="func.auth===''||func.auth==null||$store.getters.getAuthButtonList.indexOf(func.auth)>-1"  type="primary" @click="funClick(func)" :icon="func.icon" size="mini">{{func.title}}</el-button>
+               <el-button class="but3" v-if="func.auth===''||func.auth==null||$store.getters.getAuthButtonList.indexOf(func.auth)>-1"  type="primary" @click="funClick(func)" :icon="func.icon" size="mini">{{func.title}}</el-button>
             </span>
         </div>
 
@@ -187,17 +186,43 @@
 
 <style scoped>
     .wrap{
-      display: grid;
-      grid-gap: 1px;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      /*justify-content: space-between;*/
       padding-bottom: 10px;
       padding-top: 10px;
-      /*grid-template-rows: repeat(1, 30px);*/
     }
 
     .div1{
+      padding-left: 20px;
       margin: 5px;
-      font-size: 15px;
+    }
+    .div1 .div1_title{
+      flex: 1;
+      align-self: center;
+      font-size: 12px
+    }
+    .div1 .div1_content{
+      flex: 1;
+    }
+     .div1_but_0{
+      text-align: inherit;
+      align-self: center;
+      margin-left: 25px;
+    }
+    .div1_but_1{
+      margin-left: 25px;
+      margin-bottom: 5px;
+      margin-top: 5px
+    }
+    .but1{
+
+    }
+    .but2{
+
+    }
+    .but3{
+
     }
    /deep/ .width_1{
       width: 200px;

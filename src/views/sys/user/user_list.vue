@@ -38,7 +38,10 @@ export default {
                       linkName:'shopName',//连接下一个字段（可写可不写）
                       //options:{ data: [],value:"shopNo", label:'shopName'},] //type=select时才有
                     },
-                shopName:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''}
+                shopName:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''},
+                shopName1:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''},
+                shopName2:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''},
+                shopName3:{placeholder:'请输入店铺名称',type:"input",title:'店铺名称',value:''}
               },//查询（返回结果例：{shopNo:'1',shopName:'2'}）
 
           func:[
