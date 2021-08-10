@@ -1,56 +1,60 @@
 <template>
     <div  class="auth_table">
+      <!--占位符-->
+      <slot name="search_top"></slot>
         <CM_search :search-list="optionData.searchList" v-if="optionData.searchList!==undefined"></CM_search>
+      <!--占位符-->
+      <slot class="slot_div" name="search_bottom"></slot>
 
-        <!--占位-->
-        <slot class="slot_div" name="slot"></slot>
 
         <!--显示隐藏类型-->
       <m_transfer :option-data="optionData"  ref="transfer"></m_transfer>
+      <!--占位符-->
+      <slot name="table_top"></slot>
+        <div>
+          <!--  常用一般table-->
+          <el-table
+              v-if="optionData.table.length>0"
+              :height="optionData.height"
+              ref="multipleTable"
+              :data="optionData.data"
+              tooltip-effect="dark"
+              class="tableCss"
+              border
+              stripe
+              row-key="id"
+              lazy
+              :load="childrenLoad"
+              :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+              @cell-click="optionData.cellClick"
+              @cell-dblclick="optionData.cellDblclick"
+              @row-click="optionData.rowClick"
+              @row-contextmenu="optionData.rowContextmenu"
+              @row-dblclick="optionData.rowDblclick"
+              @selection-change="handleSelectionChange"
+              :header-cell-style="cellStyle"
+              :cell-style="{padding:'5px 0'}">
 
-        <!--  常用一般table-->
-        <el-table
-                v-if="optionData.table.length>0"
-                :height="optionData.height"
-                ref="multipleTable"
-                :data="optionData.data"
-                tooltip-effect="dark"
-                class="tableCss"
-                border
-                stripe
-                row-key="id"
-                lazy
-                :load="childrenLoad"
-                :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-                @cell-click="optionData.cellClick"
-                @cell-dblclick="optionData.cellDblclick"
-                @row-click="optionData.rowClick"
-                @row-contextmenu="optionData.rowContextmenu"
-                @row-dblclick="optionData.rowDblclick"
-                @selection-change="handleSelectionChange"
-                :header-cell-style="cellStyle"
-                 :cell-style="{padding:'5px 0'}">
-
-          <el-table-column v-if="optionData.openCheckbox" type="selection">
+            <el-table-column v-if="optionData.openCheckbox" type="selection">
             </el-table-column>
-                <el-table-column
-                        v-for="(item,index) in (optionData.table.filter(t=>!t.hide))"
-                        :key="index"
-                        :prop="item.prop"
-                        :label="item.label"
-                        :show-overflow-tooltip="item.showOverflowTooltip"
-                        :width="item.width===undefined?'':item.width"
-                        :min-width="item.width===undefined?'':item.width"
-                        :formatter="item.formatter">
-                    <template #default="scope">
-                      <el-tooltip class="item" effect="dark" :content="scope.row[item.prop]" :show-after="100" placement="top-start" v-if="item.showOverflowTooltip" >
-                        <span v-if="item.render" v-html="item.render(scope.row)" @click="handle(item,scope.row,scope.row[item.prop])"></span>
-                        <span v-else @click="handle(item,scope.row,scope.row[item.prop])"> {{scope.row[item.prop]}} </span>
-                      </el-tooltip>
-                      <div v-else>
-                        <span v-if="item.render" v-html="item.render(scope.row)" @click="handle(item,scope.row,scope.row[item.prop])"></span>
+            <el-table-column
+                v-for="(item,index) in (optionData.table.filter(t=>!t.hide))"
+                :key="index"
+                :prop="item.prop"
+                :label="item.label"
+                :show-overflow-tooltip="item.showOverflowTooltip"
+                :width="item.width===undefined?'':item.width"
+                :min-width="item.width===undefined?'':item.width"
+                :formatter="item.formatter">
+              <template #default="scope">
+                <el-tooltip class="item" effect="dark" :content="scope.row[item.prop]" :show-after="100" placement="top-start" v-if="item.showOverflowTooltip" >
+                  <span v-if="item.render" v-html="item.render(scope.row)" @click="handle(item,scope.row,scope.row[item.prop])"></span>
+                  <span v-else @click="handle(item,scope.row,scope.row[item.prop])"> {{scope.row[item.prop]}} </span>
+                </el-tooltip>
+                <div v-else>
+                  <span v-if="item.render" v-html="item.render(scope.row)" @click="handle(item,scope.row,scope.row[item.prop])"></span>
 
-                        <span v-else @click="handle(item,scope.row,scope.row[item.prop])">
+                  <span v-else @click="handle(item,scope.row,scope.row[item.prop])">
                               <span v-if="item.edit&&(item.editAudit!==undefined?(scope.row[item.editApply]===undefined?true:scope.row[item.editApply]!==scope.row[item.editAudit]):(item.editApply===undefined?true:scope.row[item.editApply]===undefined))">
 
                                 <!--输入框-->
@@ -63,40 +67,44 @@
 
                           <span v-else> {{scope.row[item.prop]}}</span>
                         </span>
-                      </div>
-                    </template>
-                </el-table-column>
+                </div>
+              </template>
+            </el-table-column>
 
             <el-table-column
-                    v-if="optionData.authBut!==undefined&&Object.keys(optionData.authBut).length>0"
-                    fixed="right"
-                    label="操作"
-                    :width="optionData.authButWidth===undefined?'200':optionData.authButWidth"
-                    :min-width="optionData.authButWidth===undefined?'200':optionData.authButWidth"
-                    >
-                <template #default="scope" style="text-align: center">
-                  <m_auth :scope="scope" @handle="handle" :option-data="optionData"></m_auth>
-                </template>
+                v-if="optionData.authBut!==undefined&&Object.keys(optionData.authBut).length>0"
+                fixed="right"
+                label="操作"
+                :width="optionData.authButWidth===undefined?'200':optionData.authButWidth"
+                :min-width="optionData.authButWidth===undefined?'200':optionData.authButWidth"
+            >
+              <template #default="scope" style="text-align: center">
+                <m_auth :scope="scope" @handle="handle" :option-data="optionData"></m_auth>
+              </template>
 
             </el-table-column>
-        </el-table>
+          </el-table>
 
-        <!--分页-->
-        <div class="block" v-if="optionData.openPageLoad">
+          <!--占位符-->
+          <slot name="table_bottom"></slot>
+          <!--分页-->
+          <div class="block" v-if="optionData.openPageLoad">
             <el-pagination
-                    background
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="optionData.page.currentPage"
-                    :page-sizes="optionData.page.pageSizes"
-                    :page-size="optionData.page.pageSize"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="optionData.page.total">
+                background
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="optionData.page.currentPage"
+                :page-sizes="optionData.page.pageSizes"
+                :page-size="optionData.page.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="optionData.page.total">
             </el-pagination>
+          </div>
+          <!--占位符-->
+          <slot name="page_bottom"></slot>
         </div>
-
-      <slot name="view"></slot>
-
+          <!--占位符-->
+          <slot name="div_bottom"></slot>
     </div>
 </template>
 
