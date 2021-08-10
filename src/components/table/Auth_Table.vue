@@ -25,11 +25,6 @@
               lazy
               :load="childrenLoad"
               :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-              @cell-click="optionData.cellClick"
-              @cell-dblclick="optionData.cellDblclick"
-              @row-click="optionData.rowClick"
-              @row-contextmenu="optionData.rowContextmenu"
-              @row-dblclick="optionData.rowDblclick"
               @selection-change="handleSelectionChange"
               :header-cell-style="cellStyle"
               :cell-style="{padding:'5px 0'}">
@@ -216,7 +211,6 @@
 
             //行操作自定义事件
             handle(data, row,but) {
-              alert("2131")
               if(data.func!==undefined) {
                 if (typeof data.func === "function") {
                   data.func(row, but)

@@ -12,12 +12,14 @@
             "userDel"
         ],
         "menuList": [
+
             {
                 "title": "个人信息",
                 "name": "personal_details",
                 "component": "sys/personal/personal_details",
                 "path": "/index/personal",
                 "type": 2,
+                "//type类型": "0一级菜单，（1一级父菜单2二级菜单），3不显示菜单",
                 "icon": "client",
                 "closable": true,
                 "meta": {
@@ -27,7 +29,7 @@
             {
                 "title": "数据汇总",
                 "name": "dashboard",
-                "component": "sys/dashboard/Dashboard",
+                "component": "dashboard/dashboard",
                 "path": "/index/dashboard",
                 "type": 0,
                 "icon": "client",
@@ -166,6 +168,18 @@
                         ]
                     }
                 ]
+            },
+            {
+                "title": "示例",
+                "name": "demo",
+                "component": "sys/demo/demo_list",
+                "path": "/index/demo_list",
+                "type": 0,
+                "icon": "client",
+                "closable": false,
+                "meta": {
+                    "keepAlive": true
+                }
             }
         ]
     }

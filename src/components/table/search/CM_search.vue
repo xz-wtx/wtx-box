@@ -18,19 +18,6 @@
                         </el-input>
 
 
-                        <el-cascader class="width_1"
-                                     size="mini"
-                                     :disabled="obj.disabled"
-                                     @change="realTime($event,obj)"
-                                     :show-all-levels="obj.showAll"
-                                     v-if="obj.type==='input_Linkage'"
-                                     :placeholder="obj.placeholder"
-                                     v-model="obj.value"
-                                :options="obj.selectData"
-                                     :clearable="obj.clearable===undefined?true:obj.clearable"
-                                    filterable
-                                ></el-cascader>
-
                         <el-date-picker
                                 @change="realTime($event,obj)"
                                 v-if="obj.type==='date'"
@@ -57,6 +44,7 @@
                             </el-date-picker>
 
                           <el-select
+                                    v-if="obj.type==='select'"
                                     :disabled="obj.disabled"
                                     filterable
                                     class="width_1"
@@ -64,8 +52,7 @@
                                     size="mini"
                                     v-model="obj.value"
                                     :clearable="obj.clearable===undefined?true:obj.clearable"
-                                    placeholder="请选择"
-                                    v-if="obj.type==='select'">
+                                    :placeholder="obj.placeholder">
                              <el-option
                                  v-for="item in obj.options.data"
                                  :key="item[obj.options.value]"
@@ -75,15 +62,15 @@
                         </el-select>
 
                       <el-autocomplete
+                          v-if="obj.type==='filterInput'"
                           @input="realTime($event,obj)"
                           class="width_1"
                           size="mini"
-                          v-if="obj.type==='filterInput'"
-                          v-model="obj.filterName"
-                          value-key="title"
+                          v-model="obj.value1"
+                          :value-key="obj.showTitle"
                           :clearable="obj.clearable===undefined?true:obj.clearable"
                           :fetch-suggestions="((queryString,cb)=>{queryUnit(queryString,cb,obj)})"
-                          placeholder="请输入内容"
+                          :placeholder="obj.placeholder"
                           @select="((item)=>{handleSelect(item,obj)})"
                       >
                       </el-autocomplete>
@@ -131,7 +118,7 @@
           queryUnit(queryString, cb,obj){
            let result=[];
             obj.value = "";
-            obj.url({title:queryString}).then(res => {
+            obj.url({search:queryString}).then(res => {
               if (res.data.status==200) {
                 result = res.data.data;
               }
@@ -139,10 +126,11 @@
             }).catch(err=>{
              cb([]);
            })
+
           },
           //远程搜索选中
           handleSelect  (item,obj) {
-            obj.value=item.value;
+            obj.value=item[obj.showValue];
           },
 
             //自定义事件

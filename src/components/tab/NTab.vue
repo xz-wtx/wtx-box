@@ -18,7 +18,7 @@ export default {
   name: "NTab",
   data(){
     return{
-      editableTabsValue: 'dashboard',
+      editableTabsValue: '',
       editableTabs: [],
       tabIndex: 0
 
