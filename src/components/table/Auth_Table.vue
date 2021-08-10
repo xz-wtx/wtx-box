@@ -11,10 +11,9 @@
       <m_transfer :option-data="optionData"  ref="transfer"></m_transfer>
       <!--占位符-->
       <slot name="table_top"></slot>
-        <div>
+        <div v-if="optionData.table.length>0">
           <!--  常用一般table-->
           <el-table
-              v-if="optionData.table.length>0"
               :height="optionData.height"
               ref="multipleTable"
               :data="optionData.data"
