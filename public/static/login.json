@@ -18,7 +18,7 @@
                 "name": "personal_details",
                 "component": "sys/personal/personal_details",
                 "path": "/index/personal",
-                "type": 2,
+                "type": 3,
                 "//type类型": "0一级菜单，（1一级父菜单2二级菜单），3不显示菜单",
                 "icon": "client",
                 "closable": true,
@@ -29,7 +29,7 @@
             {
                 "title": "数据汇总",
                 "name": "dashboard",
-                "component": "dashboard/dashboard",
+                "component": "base/dashboard/dashboard",
                 "path": "/index/dashboard",
                 "type": 0,
                 "icon": "client",
@@ -37,65 +37,6 @@
                 "meta": {
                     "keepAlive": true
                 }
-            },
-            {
-                "title": "用户管理",
-                "name": "agencyList",
-                "component": "agency/agencyList",
-                "path": "/index/agencyList",
-                "type": 0,
-                "icon": "client",
-                "closable": true,
-                "meta": {
-                    "keepAlive": true
-                }
-            },
-            {
-                "title": "业主",
-                "name": "",
-                "path": "yzht",
-                "type": 1,
-                "component": "common",
-                "icon": "client",
-                "meta": {
-                    "keepAlive": true
-                },
-                "children": [
-                    {
-                        "title": "意向书管理",
-                        "name": "proposalList",
-                        "component": "proposal/proposalList",
-                        "path": "/proposalList",
-                        "icon": "1",
-                        "type": 2,
-                        "meta": {
-                            "keepAlive": false
-                        },
-                        "superList": [
-                            {
-                                "title": "业主合同",
-                                "path": ""
-                            }
-                        ]
-                    },
-                    {
-                        "title": "合同管理",
-                        "name": "contractList",
-                        "component": "contract/contractList",
-                        "path": "/contractList",
-                        "icon": "client",
-                        "type": 2,
-                        "meta": {
-                            "keepAlive": true
-                        },
-                        "superList": [
-                            {
-                                "title": "业主合同",
-                                "path": ""
-                            }
-                        ]
-                    }
-                ]
             },
             {
                 "title": "账单管理",
@@ -116,11 +57,12 @@
                 "icon": "client",
                 "type": 1,
                 "children": [
+
                     {
                         "title": "管理员列表",
-                        "name": "adminList",
-                        "component": "admin/adminList",
-                        "path": "/adminList",
+                        "name": "user_list",
+                        "component": "sys/user/user_list",
+                        "path": "/user_list",
                         "icon": "client",
                         "type": 2,
                         "meta": {
@@ -134,12 +76,12 @@
                         ]
                     },
                     {
-                        "title": "管理员日志",
-                        "name": "adminLog",
-                        "component": "admin/adminLog",
-                        "path": "/adminLog",
+                        "title": "角色列表",
+                        "name": "role_list",
+                        "component": "sys/role/role_list",
+                        "path": "/roleList",
                         "icon": "client",
-                        "type": 0,
+                        "type": 2,
                         "meta": {
                             "keepAlive": true
                         },
@@ -151,10 +93,10 @@
                         ]
                     },
                     {
-                        "title": "用户列表",
-                        "name": "user_list",
-                        "component": "sys/user/user_list",
-                        "path": "/user_list",
+                        "title": "菜单列表",
+                        "name": "menu_list",
+                        "component": "sys/menu/menu_list",
+                        "path": "/menuList",
                         "icon": "client",
                         "type": 2,
                         "meta": {

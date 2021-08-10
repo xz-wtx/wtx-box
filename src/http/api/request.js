@@ -3,14 +3,14 @@
  */
 
 import axios from 'axios';
-import { ElLoading,ElMessage } from 'element-plus';
+import { ElLoading,ElMessage  } from 'element-plus';
 import store from '../../store'
 
 // 环境的切换
 let HOST = process.env.NODE_ENV;
 
 
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'http://localhost:8081';
 if (HOST === 'uat') {
   axios.defaults.baseURL =  'http://localhost:8080';
 } else if (HOST === 'prod') {
@@ -118,6 +118,8 @@ export function openToast(LoadingTitle=""){
 export function clearToast(toast){
   toast.close();
 }
+
+
 
 /**
  * axios对象

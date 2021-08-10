@@ -1,0 +1,25 @@
+{
+    "status": 200,
+    "message": "操作成功",
+    "data": {
+        "list":[
+                {
+                    "id": 0,
+                    "img": "",
+                    "userName": "张三",
+                    "phone": 15899993333,
+                    "status": 0,
+                    "createTime": "2021-8-7"
+                },
+                {
+                    "id": 1,
+                    "img": "",
+                    "userName": "李四",
+                    "phone": 18044443333,
+                    "status": 0,
+                    "createTime": "2021-3-5"
+                }
+            ]
+        },
+    "total": 2
+}

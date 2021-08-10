@@ -91,6 +91,6 @@ export default {
 <style scoped>
 
 .but_class_1{
-  margin-left: 6px;
+  margin-right: 6px;
 }
 </style>

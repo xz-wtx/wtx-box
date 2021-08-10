@@ -1,0 +1,41 @@
+{
+    "status": 200,
+    "message": "操作成功",
+    "data": {
+        "list":[
+            {
+                "id": 1,
+                "title": "数据汇总",
+                "name": "dashboard",
+                "component": "base/dashboard/dashboard",
+                "path": "/index/dashboard",
+                "type": 0,
+                "icon": "client",
+                "closable": false,
+                "meta": {
+                    "keepAlive": false
+                },
+                "status": 0,
+                "createTime": "2021-8-7"
+            },
+                {
+                    "id": 2,
+                    "title": "个人信息",
+                    "name": "personal_details",
+                    "component": "sys/personal/personal_details",
+                    "path": "/index/personal",
+                    "type": 3,
+                    "//type类型": "0一级菜单，（1一级父菜单2二级菜单），3不显示菜单",
+                    "icon": "client",
+                    "closable": true,
+                    "meta": {
+                        "keepAlive": true
+                    },
+                    "status": 0,
+                    "createTime": "2021-8-7"
+                }
+
+            ]
+        },
+    "total": 2
+}

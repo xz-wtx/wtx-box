@@ -6,18 +6,18 @@
         @loadData="load">
     </auth-table>
 
-    <el-dialog title="添加/修改用户信息" v-model="option.showDialog">
-      <User_edit ref="user_ref" @load="$refs.search.queryData()"></User_edit>
+    <el-dialog title="添加/修改角色信息" v-model="option.showDialog">
+      <role_edit ref="role_ref" @load="$refs.search.queryData()"></role_edit>
     </el-dialog>
 
   </init>
 </template>
 
 <script>
-import User_edit from "@/views/sys/user/user_edit";
+import role_edit from "@/views/sys/role/role_edit";
 export default {
-  name: "user_list",
-  components: {User_edit},
+  name: "role_list",
+  components: {role_edit},
   data(){
     return{
 
@@ -28,8 +28,7 @@ export default {
         searchList: {
           list:
               {
-                userName:{placeholder:'请输入用户名',type:"input",title:'用户名',value:''},
-                phone:{placeholder:'请输入手机号',type:"input",title:'手机号',value:''},
+                title:{placeholder:'请输入角色名称',type:"input",title:'角色名称',value:''},
               },
 
           func:[
@@ -55,17 +54,8 @@ export default {
         },
         table:[
           {
-            prop:'userName',
-            label:'用户名',
-          },
-          {
-            prop:'phone',
-            label:'手机号',
-          },
-          {
-            prop:'remark',
-            label:'备注',
-            width:120,
+            prop:'title',
+            label:'名称',
           },
           {
             prop:'createTime',
@@ -88,7 +78,7 @@ export default {
 
     //查询（查询条件直接带入{key:1,key:2}）
     load(data) {
-      this.$api.userApi.getUserPageList(data).then(res => {
+      this.$api.roleApi.getRolePageList(data).then(res => {
         if (res.data.status == 200) {
           this.option.data = res.data.data.list;
           this.option.page.total = res.data.data.total;
@@ -101,19 +91,19 @@ export default {
     add(){
       this.option.showDialog=true;
       this.$nextTick(() => {
-        this.$refs.user_ref.editRow({});
+        this.$refs.role_ref.editRow({});
       })
     },
     //修改
     rowEdit(row){
       this.option.showDialog=true;
       this.$nextTick(() => {
-        this.$refs.user_ref.editRow(JSON.parse(JSON.stringify(row)));
+        this.$refs.role_ref.editRow(JSON.parse(JSON.stringify(row)));
       })
     },
     //删除
     rowDel(row){
-      this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该角色, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'

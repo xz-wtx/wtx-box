@@ -36,7 +36,6 @@
                 :key="index"
                 :prop="item.prop"
                 :label="item.label"
-                :show-overflow-tooltip="item.showOverflowTooltip"
                 :width="item.width===undefined?'':item.width"
                 :min-width="item.width===undefined?'':item.width"
                 :formatter="item.formatter">
@@ -48,8 +47,13 @@
                 <div v-else>
                   <span v-if="item.render" v-html="item.render(scope.row)" @click="handle(item,scope.row,scope.row[item.prop])"></span>
 
-                  <span v-else @click="handle(item,scope.row,scope.row[item.prop])">
-                              <span v-if="item.edit&&(item.editAudit!==undefined?(scope.row[item.editApply]===undefined?true:scope.row[item.editApply]!==scope.row[item.editAudit]):(item.editApply===undefined?true:scope.row[item.editApply]===undefined))">
+                      <span v-else @click="handle(item,scope.row,scope.row[item.prop])">
+
+                              <span v-if="
+                              item.edit!==undefined&&
+                              (item.existsSelectNoEdit!==undefined?
+                              (item.existsSelectNoEdit.indexOf(scope.row[item.existsNoEdit])>-1):
+                              (item.existsNoEdit===undefined?true:(scope.row[item.existsNoEdit]!==undefined)))">
 
                                 <!--输入框-->
                                 <m_input :scope="scope.row"  :item="item" ></m_input>
@@ -57,10 +61,12 @@
                                 <m_select  :scope="scope.row" :item="item" ></m_select>
                                 <!--远程搜索框-->
                                 <m_autocomplete :scope="scope.row" :item="item"  ></m_autocomplete>
+                                <!--下拉框-->
+                                <m_switch  :scope="scope.row" :item="item" ></m_switch>
                               </span>
 
                           <span v-else> {{scope.row[item.prop]}}</span>
-                        </span>
+                      </span>
                 </div>
               </template>
             </el-table-column>
@@ -69,10 +75,11 @@
                 v-if="optionData.authBut!==undefined&&Object.keys(optionData.authBut).length>0"
                 fixed="right"
                 label="操作"
+
                 :width="optionData.authButWidth===undefined?'200':optionData.authButWidth"
                 :min-width="optionData.authButWidth===undefined?'200':optionData.authButWidth"
             >
-              <template #default="scope" style="text-align: center">
+              <template #default="scope" >
                 <m_auth :scope="scope" @handle="handle" :option-data="optionData"></m_auth>
               </template>
 
@@ -110,9 +117,10 @@
     import m_autocomplete from "@/components/table/comp/autocomplete/m_autocomplete";
     import m_auth from "@/components/table/comp/auth/m_auth";
     import m_transfer from "@/components/table/comp/transfer/m_transfer";
+    import m_switch from "@/components/table/comp/switch/m_switch";
     export default {
         name: "CM-Table",
-        components: {m_transfer, m_auth, m_autocomplete, m_select, m_input, CM_search},
+        components: {m_switch, m_transfer, m_auth, m_autocomplete, m_select, m_input, CM_search},
         props:{
             optionData:{
                 //搜索和事件

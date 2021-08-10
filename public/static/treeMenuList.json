@@ -1,0 +1,47 @@
+{
+    "code":200,
+    "data":[
+        {
+            "children":[
+
+            ],
+            "id":1,
+            "title":"首页"
+        },
+        {
+            "children":[
+                {
+                    "children":[
+                        {
+                            "children":[
+
+                            ],
+                            "id":4,
+                            "title":"删除"
+                        },
+                        {
+                            "children":[
+
+                            ],
+                            "id":5,
+                            "title":"新增"
+                        },
+                        {
+                            "children":[
+
+                            ],
+                            "id":6,
+                            "title":"修改"
+                        }
+                    ],
+                    "id":3,
+                    "title":"用户管理"
+                }
+
+            ],
+            "id":2,
+            "title":"系统管理"
+        }
+    ],
+    "message":"请求成功"
+}

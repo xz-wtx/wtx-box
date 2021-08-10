@@ -130,6 +130,27 @@ export default {
               return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
             }
           },
+
+
+            //动态操作
+          {
+            prop:'closable',
+            label:'可关闭',
+            edit:true,
+            type:'switch',
+            disabled:true,//不可编辑
+            existsNoEdit:"id",//该字段存在不可编辑
+
+          },
+          {
+            prop:'closable',
+            label:'可关闭',
+            edit:true,
+            type:'switch',
+            disabled:true,
+            existsNoEdit:"id",//[existsSelectNoEdit]值包含[existsNoEdit]字段值则不可编辑
+            existsSelectNoEdit:[1,2,3]
+          },
           {
             prop:'amount',
             label:'转款金额',
