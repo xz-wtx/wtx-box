@@ -1,7 +1,7 @@
 
 import AESUtil from "@/utils/AESUtil";
-import {axiosBase,successTitle,errorTitle,openToast,clearToast,openConfirm} from './api/request'
-
+import {axiosBase,successTitle,errorTitle,openToast,clearToast} from './api/request'
+import * as QS from "qs";
 
 
 /**
@@ -32,7 +32,7 @@ export function get(url,body,isToast=true,LoadingTitle="加载中...") {
  */
 export function post(url,body,isToast=true,LoadingTitle="加载中...") {
     return new Promise((resolve, reject) => {
-        request(url, "post", body, {}, LoadingTitle, isToast).then(r => {
+        request(url, "post", QS.stringify(body), {'content-type':"application/x-www-form-urlencoded"}, LoadingTitle, isToast).then(r => {
             resolve(r)
         }).catch(err=>{
             reject(err)
