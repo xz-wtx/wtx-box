@@ -21,9 +21,9 @@ export default {
   name: "m_auth",
   props:{
     optionData:{
-      type: Array,
+      type: Object,
       default: () => {
-        return []
+        return {}
       }
     },
     scope:{

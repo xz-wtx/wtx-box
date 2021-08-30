@@ -34,9 +34,9 @@ export default {
   name: "m_transfer",
   props:{
     optionData:{
-      type: Array,
+      type: Object,
       default: () => {
-        return []
+        return {}
       }
     },
 
