@@ -4,7 +4,7 @@
     <el-drawer
         title="列显隐"
         v-model="drawer"
-        size="50%"
+        :size="$_is_Mobile_width()"
         :with-header="false">
       <div style="margin-top: 50px;margin-left: 10%">
         <el-transfer
