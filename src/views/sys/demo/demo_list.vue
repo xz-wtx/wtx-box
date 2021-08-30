@@ -14,6 +14,23 @@
           <demo_edit ref="demo" @load="$refs.search.queryData()"></demo_edit>
         </el-dialog>
       </template>
+
+      <template #userPhone="slotProps">
+        <el-input v-model="slotProps.row.userPhone"></el-input>
+      </template>
+      <template #abstractCode="slotProps">
+        <el-select v-model="slotProps.row.abstractCode">
+          <el-option
+              v-for="item in slotProps.item.options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+          </el-option>
+        </el-select>
+      </template>
+
+
+
     </auth-table>
   </init>
 </template>
@@ -27,20 +44,20 @@ export default {
     return{
 
       option: {
-        //弹窗关闭（showDialog，名称自定义，可以多个）
+        //TODO 弹窗关闭（showDialog，名称自定义，可以多个）
         showDialog:false,
-        //搜索
+        //TODO 搜索
         searchList: {
           list:
               {
                 paramName1:
                     {
-                      placeholder: '实时通知',//提示
-                      title: '实时通知',//名称
-                      type: "input",//类型input，select。。。。
-                      value: '',//值
-                      valueFun: this.realTimeShopNo,//值实时变化通知（可写可不写）
-                      linkName: 'paramName?',//连接下一个参数（可写可不写）
+                      placeholder: '实时通知',//TODO 提示
+                      title: '实时通知',//TODO 名称
+                      type: "input",//TODO 类型input，select。。。。
+                      value: '',//TODO 值
+                      valueFun: this.realTimeShopNo,//TODO 值实时变化通知（可写可不写）
+                      linkName: 'paramName?',//TODO 连接下一个参数（可写可不写）
                     },
                 paramName2:{placeholder:'input',type:"input",title:'input',value:''},
 
@@ -56,59 +73,60 @@ export default {
                   type:"filterInput",
                   title:'远程搜索',
                   value:'',
-                  showTitle:'address',//显示名称字段
-                  showValue:'fff',//保存值字段
+                  showTitle:'address',//TODO 显示名称字段
+                  showValue:'fff',//TODO 保存值字段
                 },
 
-              },//查询（返回结果例：{paramName1:'1',paramName2:'2'....}）
+              },//TODO 查询（返回结果例：{paramName1:'1',paramName2:'2'....}）
 
           func:[
               {
-                title:"添加",//按钮名称
-                funName:this.add,//事件
-                auth:"",//按钮权限（可写可不写）
-                icon:'',//图片（可写可不写）
+                title:"添加",//TODO 按钮名称
+                funName:this.add,//TODO 事件
+                auth:"",//TODO 按钮权限（可写可不写）
+                icon:'',//TODO 图片（可写可不写）
               }
               ],
-          //按钮布局是否跟在查询款后面
+          //TODO 按钮布局是否跟在查询款后面
           butNewlineLayout:false,
         },
-        //是否开启隐藏字段
+        //TODO 是否开启隐藏字段
         openFieldHide:true,
-        //是否首次加
+        //TODO 是否首次加
         load:true,
-        //开启分页
+        //TODO 开启分页
         openPageLoad:true,
-        //页大小默认10
+        //TODO 页大小默认10
         page:{
           currentPage:1,
           pageSize:10,
           total:0,
         },
-        //是否开启多选
+        //TODO 是否开启多选
         openCheckbox:false,
-        //多选框选中数据
+        //TODO 多选框选中数据
         selectData:[],
         table:[
           {
             prop:'userName',
-            label:'用户名',//标签
-            func:this.userName,//函数
-            width:180,//宽度
-            showOverflowTooltip: true,//提示
-            hide: true,//是否隐藏字段
-            render(row) {//格式
+            label:'用户名',//TODO  标签
+            func:this.userName,//TODO  函数
+            width:180,//TODO  宽度
+            showOverflowTooltip: true,//TODO  提示
+            hide: true,//TODO  是否隐藏字段
+            render(row) {//TODO  格式,不要使用二级对象
               return  '<div style="color:#ff0016">'+row.userName+'</div>'
             }
           },
           {
             prop:'userPhone',
             label:'手机号',
+            openEdit:true,//TODO 双击可编辑
           },
           {
             prop: "type",
             label: "类型",
-            render(row) {//格式
+            render(row) {//TODO   格式,不要使用二级对象
               if (row.type == 0) {
                 return '<div style="color:#ff0016" >在线</div>'
               }else {
@@ -132,69 +150,36 @@ export default {
           },
 
 
-            //动态操作
-          {
-            prop:'closable',
-            label:'可关闭',
-            edit:true,
-            type:'switch',
-            disabled:true,//不可编辑
-            existsNoEdit:"id",//该字段存在不可编辑
-
-          },
-          {
-            prop:'closable',
-            label:'可关闭',
-            edit:true,
-            type:'switch',
-            disabled:true,
-            existsNoEdit:"id",//[existsSelectNoEdit]值包含[existsNoEdit]字段值则不可编辑
-            existsSelectNoEdit:[1,2,3]
-          },
-          {
-            prop:'amount',
-            label:'转款金额',
-            edit:true,//开启编辑
-            editApply:"id",//id值存在就不可编辑
-            type:'input',
-          },
-          // {
-          //   prop:'companyName',
-          //   label:'公司名称',
-          //   edit:true,//开启编辑
-          //   editApply:"id",//id值存在就不可编辑
-          //   type:'filterInput',//远程搜索
-          //   alias:"companyCode",
-          //   url:this.$api.companyApi.companyNameList,//路径
-          // },
+            //TODO 动态操作
           {
             prop:'abstractCode',
             label:'摘要',
-            edit:true,//开启编辑
-            editApply:"id",//id值存在就不可编辑
-            type:'select',
+            openEdit:true,//TODO 双击可编辑
             options:[{
-              value: 'ZCZK',
+              value: '22',
               label: 'ZCZK'
             },{
-              value: 'DZTZ',
+              value: '11',
               label: 'DZTZ'
-            }]
+            }],
+            render(row){
+              return "ZCZK";
+            }
           },
         ],
-        //操作栏宽度
+        //TODO 操作栏宽度
         authButWidth:160,
-        //操作
+        //TODO 操作
         authBut:[
-          {name:"修改",//行操作名称
-            func:this.editRow,//事件
-            authType:[3],//权限(查看components/comp/auth.vue)可修改扩展
+          {name:"修改",//TODO 行操作名称
+            func:this.editRow,//TODO 事件
+            authType:[3],//TODO 权限(查看components/comp/auth.vue)可修改扩展
             field:"type",
             value:[1]
           },
           {name:"删除",func:this.delRow},
         ],
-        //列表数据
+        //TODO 列表数据
         data: [],
       },
     }
@@ -202,29 +187,29 @@ export default {
   methods: {
 
 
-    //如当前页面存在缓存，再次点击菜单重置额外数据
+    //TODO 如当前页面存在缓存，再次点击菜单重置额外数据
     clearData(){
     alert("重置数据")
     },
 
-    //查询（查询条件直接带入{key:1,key:2}）
+    //TODO 查询（查询条件直接带入{key:1,key:2}）
     load(data) {
-      this.option.data = [{type:1},{type:2}];
-      // this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
-      //   if (res.data.status == 200) {
-      //     this.option.data = res.data.data.list;
-      //     this.option.page.total = res.data.data.total;
-      //   } else {
-      //     this.$message.error(res.data.message)
-      //   }
-      // })
+      this.option.data = [{userPhone:123,type:1,abstractCode:'11'},{userPhone:456,type:2,abstractCode:'22'}];
+      //TODO  this.$api.costShopConfigApi.getCostShopConfigList(data).then(res => {
+      //TODO    if (res.data.status == 200) {
+      //TODO      this.option.data = res.data.data.list;
+      //TODO      this.option.page.total = res.data.data.total;
+      //TODO    } else {
+      //TODO      this.$message.error(res.data.message)
+      //TODO    }
+      //TODO  })
     },
-    //新增
+    //TODO 新增
     add(){
       alert("新增")
       this.option.showDialog=true;
     },
-    //修改
+    //TODO 修改
     editRow(row){
       alert("修改")
       this.option.showDialog=true;
@@ -232,11 +217,11 @@ export default {
         this.$refs.user.editRow(JSON.parse(JSON.stringify(row)));
       })
     },
-    //删除
+    //TODO 删除
     delRow(row){
       alert("删除")
     },
-    //行字段点击
+    //TODO 行字段点击
     userName(row,but){
       alert("行字段点击")
     },

@@ -57,6 +57,8 @@ export default {
           {
             prop:'title',
             label:'标题',
+            width:180,
+            func:this.onTitle
           },
           {
             prop:'name',
@@ -108,7 +110,7 @@ export default {
             prop:'keepAlive',
             label:'缓存',
             render(row) {
-                if (row.meta.keepAlive) {
+                if (row.keepAlive) {//不要使用二级对象
                   return '<div style="color:#ff0016" >缓存</div>'
                 }else{
                   return '<div style="color: #0585d2">不缓存</div>'
@@ -137,12 +139,17 @@ export default {
     }
   },
   methods: {
-
     //查询（查询条件直接带入{key:1,key:2}）
     load(data) {
       this.$api.menuApi.getMenuPageList(data).then(res => {
         if (res.data.status == 200) {
           this.option.data = res.data.data.list;
+          if( this.option.data.length>0){
+            this.option.data.forEach(p => {
+              p.keepAlive=p.meta.keepAlive
+            })
+          }
+
           this.option.page.total = res.data.data.total;
         } else {
           this.$message.error(res.data.message)
