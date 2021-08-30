@@ -1,13 +1,14 @@
 <template>
-    <div >
+    <div>
 
         <!--简单搜索-->
         <div class="List wrap">
-
+          <!-- 自定义搜索框-->
+            <slot name="search_front"></slot>
             <div v-for="(obj,index) in searchList.list" :key="index" class="div1">
 
-                  <span class="div1_title"> {{obj.title}}：</span>
-                    <span class="div1_content">
+                  <span class="div1_title" v-if="obj.hide===undefined"> {{obj.title}}：</span>
+                    <span class="div1_content" v-if="obj.hide===undefined">
 
                         <el-input class="width_1" size="mini" v-if="obj.type==='input'"
                                   :placeholder="obj.placeholder"
@@ -25,7 +26,7 @@
                                 class="width_1"
                                 size="mini"
                                 v-model="obj.value"
-                                value-format="yyyy-MM-dd"
+                                value-format="YYYY-MM-DD"
                                 type="date"
                                 :placeholder="obj.placeholder"
                                 :clearable="obj.clearable===undefined?true:obj.clearable">
@@ -76,6 +77,9 @@
                       </el-autocomplete>
                     </span>
                 </div>
+
+          <!-- 自定义搜索框-->
+            <slot name="search_later"></slot>
 
               <div class="div1_but_0" v-if="searchList.butNewlineLayout!==undefined&&!searchList.butNewlineLayout">
                 <el-button class="but1" type="primary" icon="el-icon-search" size="mini" @click="queryData()">搜索</el-button>

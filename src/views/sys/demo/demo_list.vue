@@ -9,6 +9,22 @@
         ref="search"
         :optionData.sync="option"
         @loadData="load">
+      <!--自定义搜索框，在原本搜索框前-->
+      <template #search_front>
+        <div>
+          <span>{{option.searchList.list.paramName0.title}}:</span>
+          <input v-model="option.searchList.list.paramName0.value">
+        </div>
+      </template>
+      <!--自定义搜索框，在原本搜索框后-->
+      <template #search_later>
+        <div>
+          <span>{{option.searchList.list.paramName0.title}}:</span>
+          <input v-model="option.searchList.list.paramName0.value">
+        </div>
+      </template>
+
+      <!--弹窗-->
       <template #view>
         <el-dialog title="demo信息" v-model="option.showDialog">
           <demo_edit ref="demo" @load="$refs.search.queryData()"></demo_edit>
@@ -50,6 +66,13 @@ export default {
         searchList: {
           list:
               {
+                paramName0:{
+                  placeholder:'input',
+                  type:"input",
+                  hide:true, //TODO 隐藏,模板重写
+                  title:'input',
+                  value:''
+                },
                 paramName1:
                     {
                       placeholder: '实时通知',//TODO 提示
@@ -85,7 +108,13 @@ export default {
                 funName:this.add,//TODO 事件
                 auth:"",//TODO 按钮权限（可写可不写）
                 icon:'',//TODO 图片（可写可不写）
-              }
+              },
+            {
+              title:"导出",//TODO 按钮名称
+              funName:this.export,//TODO 事件
+              auth:"",//TODO 按钮权限（可写可不写）
+              icon:'',//TODO 图片（可写可不写）
+            }
               ],
           //TODO 按钮布局是否跟在查询款后面
           butNewlineLayout:false,
@@ -208,6 +237,11 @@ export default {
     add(){
       alert("新增")
       this.option.showDialog=true;
+    },
+    export(){
+      alert("导出")
+     let param=this.$refs.search.getSearchValue();//获取组装参数
+      alert(JSON.stringify(param))
     },
     //TODO 修改
     editRow(row){

@@ -2,7 +2,15 @@
     <div  class="auth_table">
       <!--占位符-->
       <slot name="search_top"></slot>
-        <CM_search :search-list="optionData.searchList" v-if="optionData.searchList!==undefined"></CM_search>
+        <CM_search :search-list="optionData.searchList" v-if="optionData.searchList!==undefined">
+          <template #search_front>
+            <slot name="search_front"></slot>
+          </template>
+          <template #search_later>
+            <slot name="search_later"></slot>
+          </template>
+        </CM_search>
+
       <!--占位符-->
       <slot class="slot_div" name="search_bottom"></slot>
 
